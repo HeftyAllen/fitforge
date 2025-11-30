@@ -1,0 +1,125 @@
+WAIT its good to keep the same foundation but remember as u seperated it like this Complete HTML File List (46 files):
+Core Pages
+index.html - Home/Landing page
+
+home.html - User dashboard
+
+404.html - Error page
+
+Authentication
+auth-login.html - Sign in
+
+auth-signup.html - Create account
+
+auth-forgot.html - Password reset
+
+auth-magic-link.html - Passwordless login
+
+Onboarding
+onboarding-step1.html - Goals & availability
+
+onboarding-step2.html - Nutrition preferences
+
+onboarding-step3.html - Health & limitations
+
+onboarding-step4.html - Measurements & finish
+
+Workouts & Exercises
+workouts.html - Workout library
+
+workout-builder.html - Create custom workouts
+
+workout-detail.html - Workout details
+
+player.html - Guided session player
+
+exercises.html - Exercise library
+
+exercise-detail.html - Exercise instructions
+
+Nutrition
+nutrition.html - Meal planning & recipes
+
+mealplan.html - Weekly meal planner
+
+recipe-detail.html - Recipe details
+
+shopping-list.html - Grocery list
+
+Progress Tracking
+progress.html - Progress dashboard
+
+log-entry.html - Add progress log
+
+metric-detail.html - Log details
+
+Community & Social
+community.html - Social feed
+
+post-detail.html - Post details & comments
+
+challenges.html - Fitness challenges
+
+messages.html - Chat with friends
+
+User Account
+profile.html - User profile
+
+settings.html - Account settings
+
+notifications.html - Notification preferences
+
+AI & Tools
+chatbot.html - AI fitness coach
+
+admin.html - Admin panel
+
+Running & Outdoor
+running-tracker.html - Run/hike tracking
+
+running-history.html - Past activities
+
+weather-widget.html - Weather information
+
+System & Data
+sync-status.html - Data synchronization
+
+export.html - Data export
+
+Legal
+terms.html - Terms of service
+
+privacy.html - Privacy policy so u have a good idea of what each section is gonna use apis like exercise db and spoonacular and feed image dtaa from those things for example so i want the htmls to be fully detailed before we style as we gonna add dark/light mode stuff later and other styling and fucntional features so please make these html different and fully complete
+
+
+import React, { useEffect } from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HeroSection from './components/HeroSection';
+import './assets/css/styles.css';
+import './assets/css/landing.css';
+import './assets/js/theme.js';
+import './assets/js/landing.js';
+
+function App() {
+  // optional: run legacy JS if needed
+  useEffect(() => {
+    if (window.initTheme) window.initTheme();
+    if (window.initLanding) window.initLanding();
+  }, []);
+
+  return (
+    <div className="app-container landing-page">
+      <Header />
+      <main className="main-content">
+        <HeroSection />
+        {/* You can add Features, Pricing, Testimonials, CTA sections as separate components */}
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
+
+

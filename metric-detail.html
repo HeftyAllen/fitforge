@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Log Details - FitForge</title>
+    <meta name="description" content="View detailed progress log information">
+    <link rel="stylesheet" href="assets/css/styles.css">
+          <link rel="stylesheet" href="assets/css/progress.css">
+</head>
+<body class="dashboard-page">
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <a href="home.html" class="logo">FitForge</a>
+                </div>
+                
+                <nav class="main-nav">
+        <a href="home.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            Dashboard
+        </a>
+        <a href="workouts.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+            </svg>
+            Workouts
+        </a>
+        <a href="nutrition.html" class="nav-link ">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+            Nutrition
+        </a>
+        <a href="running-tracker.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Running Tracker
+        </a>
+        <a href="progress.html" class="nav-link active">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+            </svg>
+            Progress
+        </a>
+        <a href="community.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+            </svg>
+            Community
+        </a>
+        <a href="chatbot.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+            </svg>
+            Chatbot
+        </a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn notification-btn" aria-label="Notifications" >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <span class="notification-badge" >3</span>
+        </button>
+        
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+        
+        <div class="user-menu">
+            <button class="user-btn" aria-label="User menu">
+                <img src="assets/images/avatar-placeholder.jpg" alt="User avatar" class="user-avatar">
+                <span class="user-name">Alex Johnson</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="user-dropdown">
+                <a href="profile.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    Settings
+                </a>
+                                       <a href="sync-status.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 12a9 9 0 0114.7-6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M17 2v4h-4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21 12a9 9 0 01-14.7 6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7 22v-4h4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Sync
+</a>
+<a href="export.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3.5" y="13.5" width="17" height="6" rx="1.2"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 3.5v10"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 7.5L12 3.5l3.5 4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Export
+</a>
+                <div class="dropdown-divider"></div>
+                <a href="auth-login.html" class="dropdown-item text-danger">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign Out
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="metric-detail-container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1>Progress Log Details</h1>
+                        <p>Weight & Measurements from November 15, 2024</p>
+                    </div>
+                    <div class="header-actions">
+                        <a href="progress.html" class="btn btn-secondary">Back to Progress</a>
+                        <a href="log-entry.html" class="btn btn-primary">Edit Log</a>
+                    </div>
+                </div>
+
+                <!-- Log Summary -->
+                <div class="log-summary">
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <h4>Log Date</h4>
+                            <div class="summary-value">November 15, 2024</div>
+                            <div class="summary-meta">8:30 AM</div>
+                        </div>
+                        <div class="summary-card">
+                            <h4>Log Type</h4>
+                            <div class="summary-value">Body Measurements</div>
+                            <div class="summary-meta">Weekly Check-in</div>
+                        </div>
+                        <div class="summary-card">
+                            <h4>Changes</h4>
+                            <div class="summary-value positive">-1.2 lbs</div>
+                            <div class="summary-meta">Since last week</div>
+                        </div>
+                        <div class="summary-card">
+                            <h4>Status</h4>
+                            <div class="summary-value">On Track</div>
+                            <div class="summary-meta">Meeting goals</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Measurement Details -->
+                <div class="measurement-details">
+                    <div class="section-header">
+                        <h2>Body Measurements</h2>
+                        <div class="comparison-toggle">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="show-comparison" checked>
+                                <span class="checkmark"></span>
+                                Show comparison
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="measurements-grid">
+                        <div class="measurement-item">
+                            <div class="measurement-header">
+                                <h4>Weight</h4>
+                                <span class="measurement-value">165.0 lbs</span>
+                            </div>
+                            <div class="measurement-comparison positive">
+                                <span class="comparison-arrow">↓</span>
+                                <span class="comparison-value">-1.2 lbs from last week</span>
+                            </div>
+                            <div class="measurement-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 82%"></div>
+                                </div>
+                                <span class="progress-text">82% to goal (160 lbs)</span>
+                            </div>
+                        </div>
+
+                        <div class="measurement-item">
+                            <div class="measurement-header">
+                                <h4>Body Fat %</h4>
+                                <span class="measurement-value">18.5%</span>
+                            </div>
+                            <div class="measurement-comparison positive">
+                                <span class="comparison-arrow">↓</span>
+                                <span class="comparison-value">-0.3% from last week</span>
+                            </div>
+                        </div>
+
+                        <div class="measurement-item">
+                            <div class="measurement-header">
+                                <h4>Chest</h4>
+                                <span class="measurement-value">42.0 in</span>
+                            </div>
+                            <div class="measurement-comparison positive">
+                                <span class="comparison-arrow">↑</span>
+                                <span class="comparison-value">+0.5 in from last week</span>
+                            </div>
+                        </div>
+
+                        <div class="measurement-item">
+                            <div class="measurement-header">
+                                <h4>Waist</h4>
+                                <span class="measurement-value">34.0 in</span>
+                            </div>
+                            <div class="measurement-comparison positive">
+                                <span class="comparison-arrow">↓</span>
+                                <span class="comparison-value">-0.8 in from last week</span>
+                            </div>
+                        </div>
+
+                        <div class="measurement-item">
+                            <div class="measurement-header">
+                                <h4>Hips</h4>
+                                <span class="measurement-value">38.5 in</span>
+                            </div>
+                            <div class="measurement-comparison neutral">
+                                <span class="comparison-value">No change from last week</span>
+                            </div>
+                        </div>
+
+                        <div class="measurement-item">
+                            <div class="measurement-header">
+                                <h4>Arms</h4>
+                                <span class="measurement-value">15.5 in</span>
+                            </div>
+                            <div class="measurement-comparison positive">
+                                <span class="comparison-arrow">↑</span>
+                                <span class="comparison-value">+0.2 in from last week</span>
+                            </div>
+                        </div>
+
+                        <div class="measurement-item">
+                            <div class="measurement-header">
+                                <h4>Thighs</h4>
+                                <span class="measurement-value">24.0 in</span>
+                            </div>
+                            <div class="measurement-comparison positive">
+                                <span class="comparison-arrow">↑</span>
+                                <span class="comparison-value">+0.3 in from last week</span>
+                            </div>
+                        </div>
+
+                        <div class="measurement-item">
+                            <div class="measurement-header">
+                                <h4>Calves</h4>
+                                <span class="measurement-value">16.0 in</span>
+                            </div>
+                            <div class="measurement-comparison neutral">
+                                <span class="comparison-value">No change from last week</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Notes -->
+                <div class="progress-notes">
+                    <h2>Notes</h2>
+                    <div class="notes-content">
+                        <p>Great progress this week! Weight is trending downward while maintaining muscle mass. Strength training is paying off with increases in chest and arm measurements. Need to focus on maintaining consistency with nutrition plan.</p>
+                        
+                        <div class="notes-meta">
+                            <span class="notes-tags">
+                                <span class="tag">On Track</span>
+                                <span class="tag">Strength Gains</span>
+                                <span class="tag">Fat Loss</span>
+                            </span>
+                            <span class="notes-date">Logged on November 15, 2024 at 8:30 AM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Photos -->
+                <div class="progress-photos">
+                    <div class="section-header">
+                        <h2>Progress Photos</h2>
+                        <button class="btn btn-secondary">Add Photos</button>
+                    </div>
+
+                    <div class="photos-grid">
+                        <div class="photo-item">
+                            <div class="photo-placeholder">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/>
+                                </svg>
+                            </div>
+                            <span class="photo-label">Front View</span>
+                        </div>
+
+                        <div class="photo-item">
+                            <div class="photo-placeholder">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/>
+                                </svg>
+                            </div>
+                            <span class="photo-label">Side View</span>
+                        </div>
+
+                        <div class="photo-item">
+                            <div class="photo-placeholder">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/>
+                                </svg>
+                            </div>
+                            <span class="photo-label">Back View</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trend Analysis -->
+                <div class="trend-analysis">
+                    <h2>Trend Analysis</h2>
+                    <div class="analysis-content">
+                        <div class="trend-item positive">
+                            <h4>Positive Trends</h4>
+                            <ul>
+                                <li>Consistent weight loss of 1-2 lbs per week</li>
+                                <li>Increasing chest and arm measurements indicate muscle growth</li>
+                                <li>Body fat percentage decreasing steadily</li>
+                                <li>Waist measurement showing significant reduction</li>
+                            </ul>
+                        </div>
+
+                        <div class="trend-item neutral">
+                            <h4>Areas to Watch</h4>
+                            <ul>
+                                <li>Hip and calf measurements unchanged - consider targeted exercises</li>
+                                <li>Maintain current nutrition plan for continued fat loss</li>
+                            </ul>
+                        </div>
+
+                        <div class="trend-item recommendation">
+                            <h4>Recommendations</h4>
+                            <ul>
+                                <li>Continue current workout routine</li>
+                                <li>Add calf raises to leg days</li>
+                                <li>Consider increasing protein intake slightly</li>
+                                <li>Schedule next measurement in 1 week</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="detail-actions">
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary">Export Data</button>
+                        <button class="btn btn-secondary">Print Report</button>
+                        <button class="btn btn-primary">Share Progress</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/metric-detail.js"></script>
+</body>
+</html>

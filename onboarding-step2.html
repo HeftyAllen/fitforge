@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Preferences - FitForge</title>
+    <meta name="description" content="Set your dietary preferences and nutrition goals">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/onboarding.css">
+</head>
+<body class="onboarding-page">
+    <div class="onboarding-container">
+        <!-- Progress Header -->
+        <header class="onboarding-header">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                        <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                        <circle cx="16" cy="16" r="4"/>
+                    </svg>
+                    <span class="logo-text">FitForge</span>
+                </a>
+                <div class="onboarding-progress">
+                    <div class="progress-steps">
+                        <div class="step completed" data-step="1">
+                            <div class="step-number">1</div>
+                            <span class="step-label">Goals</span>
+                        </div>
+                        <div class="step active" data-step="2">
+                            <div class="step-number">2</div>
+                            <span class="step-label">Nutrition</span>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <span class="step-label">Health</span>
+                        </div>
+                        <div class="step" data-step="4">
+                            <div class="step-number">4</div>
+                            <span class="step-label">Finish</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 50%"></div>
+                    </div>
+                </div>
+                <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+                    <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="onboarding-content">
+            <div class="onboarding-card">
+                <div class="card-header">
+                    <h1>Your Nutrition Preferences</h1>
+                    <p>Tell us about your dietary needs and goals</p>
+                </div>
+
+                <form class="onboarding-form" id="nutrition-form">
+                    <!-- Dietary Preferences -->
+                    <div class="form-section">
+                        <h2 class="section-title">Dietary Style</h2>
+                        <p class="section-description">Select your preferred eating pattern</p>
+                        
+                        <div class="diet-grid">
+                            <label class="diet-card">
+                                <input type="radio" name="dietType" value="balanced" class="diet-input">
+                                <div class="diet-content">
+                                    <div class="diet-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6Z"/>
+                                        </svg>
+                                    </div>
+                                    <h3>Balanced</h3>
+                                    <p>Mix of all food groups for general health</p>
+                                    <div class="diet-tags">
+                                        <span class="tag">Flexible</span>
+                                        <span class="tag">All Foods</span>
+                                    </div>
+                                </div>
+                                <div class="diet-check">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </label>
+
+                            <label class="diet-card">
+                                <input type="radio" name="dietType" value="high-protein" class="diet-input">
+                                <div class="diet-content">
+                                    <div class="diet-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z"/>
+                                        </svg>
+                                    </div>
+                                    <h3>High Protein</h3>
+                                    <p>Focus on protein-rich foods for muscle building</p>
+                                    <div class="diet-tags">
+                                        <span class="tag">Muscle Focus</span>
+                                        <span class="tag">Protein Rich</span>
+                                    </div>
+                                </div>
+                                <div class="diet-check">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </label>
+
+                            <label class="diet-card">
+                                <input type="radio" name="dietType" value="vegetarian" class="diet-input">
+                                <div class="diet-content">
+                                    <div class="diet-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M20,12C20,8.56 18.81,5.5 16.5,3.5C14.31,1.6 11.31,1 8.5,1L8.5,3C10.5,3 12.5,3.5 14,4.5C15.5,5.5 16.5,7 16.5,9C16.5,11 15.5,12.5 14,13.5C12.5,14.5 10.5,15 8.5,15L8.5,17C11.31,17 14.31,16.4 16.5,14.5C18.81,12.56 20,9.44 20,6V12Z"/>
+                                        </svg>
+                                    </div>
+                                    <h3>Vegetarian</h3>
+                                    <p>Plant-based diet with dairy and eggs</p>
+                                    <div class="diet-tags">
+                                        <span class="tag">Plant Based</span>
+                                        <span class="tag">No Meat</span>
+                                    </div>
+                                </div>
+                                <div class="diet-check">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </label>
+
+                            <label class="diet-card">
+                                <input type="radio" name="dietType" value="vegan" class="diet-input">
+                                <div class="diet-content">
+                                    <div class="diet-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M20,12C20,8.56 18.81,5.5 16.5,3.5C14.31,1.6 11.31,1 8.5,1L8.5,3C10.5,3 12.5,3.5 14,4.5C15.5,5.5 16.5,7 16.5,9C16.5,11 15.5,12.5 14,13.5C12.5,14.5 10.5,15 8.5,15L8.5,17C11.31,17 14.31,16.4 16.5,14.5C18.81,12.56 20,9.44 20,6V12Z"/>
+                                        </svg>
+                                    </div>
+                                    <h3>Vegan</h3>
+                                    <p>100% plant-based, no animal products</p>
+                                    <div class="diet-tags">
+                                        <span class="tag">Plant Only</span>
+                                        <span class="tag">No Animal</span>
+                                    </div>
+                                </div>
+                                <div class="diet-check">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </label>
+
+                            <label class="diet-card">
+                                <input type="radio" name="dietType" value="keto" class="diet-input">
+                                <div class="diet-content">
+                                    <div class="diet-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16"/>
+                                        </svg>
+                                    </div>
+                                    <h3>Keto</h3>
+                                    <p>High fat, low carbohydrate diet</p>
+                                    <div class="diet-tags">
+                                        <span class="tag">Low Carb</span>
+                                        <span class="tag">High Fat</span>
+                                    </div>
+                                </div>
+                                <div class="diet-check">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </label>
+
+                            <label class="diet-card">
+                                <input type="radio" name="dietType" value="mediterranean" class="diet-input">
+                                <div class="diet-content">
+                                    <div class="diet-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6Z"/>
+                                        </svg>
+                                    </div>
+                                    <h3>Mediterranean</h3>
+                                    <p>Whole foods, healthy fats, and lean proteins</p>
+                                    <div class="diet-tags">
+                                        <span class="tag">Heart Healthy</span>
+                                        <span class="tag">Whole Foods</span>
+                                    </div>
+                                </div>
+                                <div class="diet-check">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Calorie & Macro Targets -->
+                    <div class="form-section">
+                        <h2 class="section-title">Nutrition Targets</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="calorieTarget" class="form-label">Daily Calorie Target</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="calorieTarget" name="calorieTarget" class="form-input" placeholder="2000" min="1200" max="5000" required>
+                                    <span class="input-unit">kcal</span>
+                                </div>
+                                <div class="form-hint">Based on your goals and activity level</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="macroSplit" class="form-label">Macro Split Preference</label>
+                                <select id="macroSplit" name="macroSplit" class="form-select" required>
+                                    <option value="">Select preference</option>
+                                    <option value="balanced">Balanced (40/30/30)</option>
+                                    <option value="high-protein">High Protein (40/40/20)</option>
+                                    <option value="low-carb">Low Carb (50/30/20)</option>
+                                    <option value="performance">Performance (50/25/25)</option>
+                                </select>
+                                <div class="form-hint">Protein / Carbs / Fat ratio</div>
+                            </div>
+                        </div>
+
+                        <!-- Macro Preview -->
+                        <div class="macro-preview" id="macro-preview">
+                            <div class="macro-breakdown">
+                                <div class="macro-item protein">
+                                    <span class="macro-label">Protein</span>
+                                    <span class="macro-value">160g</span>
+                                    <div class="macro-bar">
+                                        <div class="macro-fill" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                                <div class="macro-item carbs">
+                                    <span class="macro-label">Carbs</span>
+                                    <span class="macro-value">200g</span>
+                                    <div class="macro-bar">
+                                        <div class="macro-fill" style="width: 30%"></div>
+                                    </div>
+                                </div>
+                                <div class="macro-item fat">
+                                    <span class="macro-label">Fat</span>
+                                    <span class="macro-value">67g</span>
+                                    <div class="macro-bar">
+                                        <div class="macro-fill" style="width: 30%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Food Restrictions -->
+                    <div class="form-section">
+                        <h2 class="section-title">Food Restrictions & Allergies</h2>
+                        <p class="section-description">Select any foods you avoid or are allergic to</p>
+                        
+                        <div class="restrictions-grid">
+                            <label class="restriction-card">
+                                <input type="checkbox" name="restrictions" value="dairy" class="restriction-input">
+                                <div class="restriction-content">
+                                    <span>Dairy</span>
+                                    <span class="restriction-examples">Milk, cheese, yogurt</span>
+                                </div>
+                            </label>
+
+                            <label class="restriction-card">
+                                <input type="checkbox" name="restrictions" value="gluten" class="restriction-input">
+                                <div class="restriction-content">
+                                    <span>Gluten</span>
+                                    <span class="restriction-examples">Wheat, barley, rye</span>
+                                </div>
+                            </label>
+
+                            <label class="restriction-card">
+                                <input type="checkbox" name="restrictions" value="nuts" class="restriction-input">
+                                <div class="restriction-content">
+                                    <span>Nuts</span>
+                                    <span class="restriction-examples">Tree nuts, peanuts</span>
+                                </div>
+                            </label>
+
+                            <label class="restriction-card">
+                                <input type="checkbox" name="restrictions" value="seafood" class="restriction-input">
+                                <div class="restriction-content">
+                                    <span>Seafood</span>
+                                    <span class="restriction-examples">Fish, shellfish</span>
+                                </div>
+                            </label>
+
+                            <label class="restriction-card">
+                                <input type="checkbox" name="restrictions" value="eggs" class="restriction-input">
+                                <div class="restriction-content">
+                                    <span>Eggs</span>
+                                    <span class="restriction-examples">Chicken eggs</span>
+                                </div>
+                            </label>
+
+                            <label class="restriction-card">
+                                <input type="checkbox" name="restrictions" value="soy" class="restriction-input">
+                                <div class="restriction-content">
+                                    <span>Soy</span>
+                                    <span class="restriction-examples">Tofu, soy milk</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="otherRestrictions" class="form-label">Other Restrictions (Optional)</label>
+                            <textarea id="otherRestrictions" name="otherRestrictions" class="form-textarea" placeholder="List any other food allergies, intolerances, or preferences..." rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Meal Preferences -->
+                    <div class="form-section">
+                        <h2 class="section-title">Meal Planning Preferences</h2>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Typical Meal Schedule</label>
+                            <div class="meal-schedule-grid">
+                                <label class="meal-time-card">
+                                    <input type="checkbox" name="mealTimes" value="breakfast" class="meal-time-input">
+                                    <div class="meal-time-content">
+                                        <span>Breakfast</span>
+                                        <span class="meal-time">7-9 AM</span>
+                                    </div>
+                                </label>
+
+                                <label class="meal-time-card">
+                                    <input type="checkbox" name="mealTimes" value="lunch" class="meal-time-input">
+                                    <div class="meal-time-content">
+                                        <span>Lunch</span>
+                                        <span class="meal-time">12-2 PM</span>
+                                    </div>
+                                </label>
+
+                                <label class="meal-time-card">
+                                    <input type="checkbox" name="mealTimes" value="dinner" class="meal-time-input">
+                                    <div class="meal-time-content">
+                                        <span>Dinner</span>
+                                        <span class="meal-time">6-8 PM</span>
+                                    </div>
+                                </label>
+
+                                <label class="meal-time-card">
+                                    <input type="checkbox" name="mealTimes" value="snacks" class="meal-time-input">
+                                    <div class="meal-time-content">
+                                        <span>Snacks</span>
+                                        <span class="meal-time">Throughout day</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cookingTime" class="form-label">Average Cooking Time Preference</label>
+                            <select id="cookingTime" name="cookingTime" class="form-select">
+                                <option value="quick">Quick (Under 15 minutes)</option>
+                                <option value="moderate">Moderate (15-30 minutes)</option>
+                                <option value="extended">Extended (30+ minutes)</option>
+                                <option value="meal-prep">Meal Prep Friendly</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <a href="onboarding-step1.html" class="btn btn-secondary">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+                            </svg>
+                            Back to Goals
+                        </a>
+                        <div class="action-group">
+                            <button type="button" class="btn btn-secondary" onclick="saveProgress()">
+                                Save Progress
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Continue to Health
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/onboarding.js"></script>
+</body>
+</html>

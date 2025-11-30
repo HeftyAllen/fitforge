@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goals & Availability - FitForge</title>
+    <meta name="description" content="Set your fitness goals and availability">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/onboarding.css">
+</head>
+<body class="onboarding-page">
+    <div class="onboarding-container">
+        <!-- Progress Header -->
+        <header class="onboarding-header">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                        <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                        <circle cx="16" cy="16" r="4"/>
+                    </svg>
+                    <span class="logo-text">FitForge</span>
+                </a>
+                <div class="onboarding-progress">
+                    <div class="progress-steps">
+                        <div class="step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <span class="step-label">Goals</span>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-number">2</div>
+                            <span class="step-label">Nutrition</span>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <span class="step-label">Health</span>
+                        </div>
+                        <div class="step" data-step="4">
+                            <div class="step-number">4</div>
+                            <span class="step-label">Finish</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 25%"></div>
+                    </div>
+                </div>
+                <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+                    <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="onboarding-content">
+            <div class="onboarding-card">
+                <div class="card-header">
+                    <h1>What's Your Primary Goal?</h1>
+                    <p>Choose your main focus so we can create the perfect plan for you</p>
+                </div>
+
+                <form class="onboarding-form" id="goals-form">
+                    <!-- Primary Goal Selection -->
+                    <div class="form-section">
+                        <h2 class="section-title">Primary Fitness Goal</h2>
+                        <p class="section-description">Select the goal that matters most to you right now</p>
+                        
+                        <div class="goal-grid">
+                            <label class="goal-card">
+                                <input type="radio" name="primaryGoal" value="strength" class="goal-input">
+                                <div class="goal-content">
+                                    <div class="goal-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M17.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                        </svg>
+                                    </div>
+                                    <h3>Build Strength</h3>
+                                    <p>Increase your maximum lifting capacity with progressive overload</p>
+                                    <ul class="goal-features">
+                                        <li>Heavy compound lifts</li>
+                                        <li>Lower rep ranges</li>
+                                        <li>Strength progression</li>
+                                    </ul>
+                                </div>
+                                <div class="goal-check">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </label>
+
+                            <label class="goal-card">
+                                <input type="radio" name="primaryGoal" value="muscle" class="goal-input">
+                                <div class="goal-content">
+                                    <div class="goal-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7H15V9H21ZM18 12C19.1 12 20 12.9 20 14C20 15.1 19.1 16 18 16C16.9 16 16 15.1 16 14C16 12.9 16.9 12 18 12ZM6 12C7.1 12 8 12.9 8 14C8 15.1 7.1 16 6 16C4.9 16 4 15.1 4 14C4 12.9 4.9 12 6 12ZM21 17V15H15V17H21ZM12 18C13.1 18 14 18.9 14 20C14 21.1 13.1 22 12 22C10.9 22 10 21.1 10 20C10 18.9 10.9 18 12 18Z"/>
+                                        </svg>
+                                    </div>
+                                    <h3>Gain Muscle</h3>
+                                    <p>Focus on muscle hypertrophy and aesthetic development</p>
+                                    <ul class="goal-features">
+                                        <li>Volume-based training</li>
+                                        <li>Moderate rep ranges</li>
+                                        <li>Muscle isolation work</li>
+                                    </ul>
+                                </div>
+                                <div class="goal-check">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </label>
+
+                            <label class="goal-card">
+                                <input type="radio" name="primaryGoal" value="fat-loss" class="goal-input">
+                                <div class="goal-content">
+                                    <div class="goal-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6Z"/>
+                                        </svg>
+                                    </div>
+                                    <h3>Lose Fat</h3>
+                                    <p>Reduce body fat while maintaining muscle mass</p>
+                                    <ul class="goal-features">
+                                        <li>Calorie deficit focus</li>
+                                        <li>Cardio integration</li>
+                                        <li>Metabolic conditioning</li>
+                                    </ul>
+                                </div>
+                                <div class="goal-check">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </label>
+
+                            <label class="goal-card">
+                                <input type="radio" name="primaryGoal" value="endurance" class="goal-input">
+                                <div class="goal-content">
+                                    <div class="goal-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M13.5,5.5C14.59,5.5 15.5,4.58 15.5,3.5C15.5,2.38 14.59,1.5 13.5,1.5C12.39,1.5 11.5,2.38 11.5,3.5C11.5,4.58 12.39,5.5 13.5,5.5M9.89,19.38L10.89,18L13,17L11.31,15.28C10.5,15.81 10,16.62 10,17.5C10,18.39 10.5,19.19 11.31,19.72L9.89,19.38M22,13V15H18L16.59,13.59L17.71,12.46C17.5,12 17,11.54 16.39,11.19C15.77,10.84 15.05,10.68 14.29,10.72C13.11,10.82 12.07,11.29 11.27,12.04C10.5,12.81 10.03,13.83 10,15H12C12.08,14.19 12.5,13.44 13.13,12.93C13.77,12.41 14.6,12.08 15.5,12C16.43,12.09 17.31,12.46 18,13C18.69,13.54 19.19,14.28 19.47,15H17C16.5,15 16,15.5 16,16V18C16,18.5 16.5,19 17,19H22C22.5,19 23,18.5 23,18V16C23,15.5 22.5,15 22,15H20C20,13.9 19.5,12.9 18.7,12.21C17.9,11.5 16.8,11.15 15.6,11.15C14.8,11.15 14,11.3 13.28,11.6C12.56,11.9 11.94,12.35 11.44,12.93C10.94,13.5 10.58,14.19 10.41,14.92L8.91,11.82C9.71,11.34 10.05,10.54 10.05,9.5C10.05,8.4 9.66,7.5 8.87,6.81C8.08,6.12 7.1,5.75 5.94,5.75C4.78,5.75 3.81,6.12 3.02,6.81C2.23,7.5 1.84,8.4 1.84,9.5C1.84,10.45 2.17,11.25 2.83,11.9C3.5,12.55 4.3,12.9 5.24,12.9C5.8,12.9 6.32,12.75 6.8,12.45L8.91,16.5L7,21H15L17.7,15.5L22,13Z"/>
+                                        </svg>
+                                    </div>
+                                    <h3>Improve Endurance</h3>
+                                    <p>Build cardiovascular fitness and stamina</p>
+                                    <ul class="goal-features">
+                                        <li>Cardio-focused workouts</li>
+                                        <li>Interval training</li>
+                                        <li>Endurance progression</li>
+                                    </ul>
+                                </div>
+                                <div class="goal-check">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Availability & Experience -->
+                    <div class="form-section">
+                        <h2 class="section-title">Your Schedule & Experience</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="workoutDays" class="form-label">Workouts Per Week</label>
+                                <select id="workoutDays" name="workoutDays" class="form-select" required>
+                                    <option value="">Select frequency</option>
+                                    <option value="2">2 days per week</option>
+                                    <option value="3">3 days per week</option>
+                                    <option value="4">4 days per week</option>
+                                    <option value="5">5 days per week</option>
+                                    <option value="6">6 days per week</option>
+                                    <option value="7">7 days per week</option>
+                                </select>
+                                <div class="form-hint">How many days can you commit to training?</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sessionLength" class="form-label">Session Duration</label>
+                                <select id="sessionLength" name="sessionLength" class="form-select" required>
+                                    <option value="">Select duration</option>
+                                    <option value="30">30 minutes</option>
+                                    <option value="45">45 minutes</option>
+                                    <option value="60">60 minutes</option>
+                                    <option value="75">75 minutes</option>
+                                    <option value="90">90+ minutes</option>
+                                </select>
+                                <div class="form-hint">Average time available per session</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experienceLevel" class="form-label">Fitness Experience</label>
+                            <select id="experienceLevel" name="experienceLevel" class="form-select" required>
+                                <option value="">Select your level</option>
+                                <option value="beginner">Beginner - New to structured training</option>
+                                <option value="intermediate">Intermediate - Some experience with workouts</option>
+                                <option value="advanced">Advanced - Years of consistent training</option>
+                            </select>
+                            <div class="form-hint">This helps us customize exercise difficulty</div>
+                        </div>
+                    </div>
+
+                    <!-- Available Equipment -->
+                    <div class="form-section">
+                        <h2 class="section-title">Available Equipment</h2>
+                        <p class="section-description">Select all equipment you have access to</p>
+                        
+                        <div class="equipment-grid">
+                            <label class="equipment-card">
+                                <input type="checkbox" name="equipment" value="bodyweight" class="equipment-input">
+                                <div class="equipment-content">
+                                    <div class="equipment-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7.07,18.28C7.5,17.38 8.58,16.5 9.27,15.71C9.61,15.33 9.62,14.7 9.27,14.31L9.05,14.08C8.45,13.47 8.45,12.53 9.05,11.93C9.66,11.32 10.6,11.32 11.21,11.93L12,12.62L12.79,11.93C13.4,11.32 14.34,11.32 14.95,11.93C15.55,12.53 15.55,13.47 14.95,14.08L14.73,14.31C14.38,14.7 14.39,15.33 14.73,15.71C15.42,16.5 16.5,17.38 16.93,18.28C15.57,19.36 13.86,20 12,20C10.14,20 8.43,19.36 7.07,18.28Z"/>
+                                        </svg>
+                                    </div>
+                                    <span>Bodyweight Only</span>
+                                </div>
+                            </label>
+
+                            <label class="equipment-card">
+                                <input type="checkbox" name="equipment" value="dumbbells" class="equipment-input">
+                                <div class="equipment-content">
+                                    <div class="equipment-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M4.5,2C5.05,2 5.5,2.45 5.5,3C5.5,3.55 5.05,4 4.5,4C3.95,4 3.5,3.55 3.5,3C3.5,2.45 3.95,2 4.5,2M7,2C7.55,2 8,2.45 8,3C8,3.55 7.55,4 7,4C6.45,4 6,3.55 6,3C6,2.45 6.45,2 7,2M9.5,2C10.05,2 10.5,2.45 10.5,3C10.5,3.55 10.05,4 9.5,4C8.95,4 8.5,3.55 8.5,3C8.5,2.45 8.95,2 9.5,2M12,2C12.55,2 13,2.45 13,3C13,3.55 12.55,4 12,4C11.45,4 11,3.55 11,3C11,2.45 11.45,2 12,2M14.5,2C15.05,2 15.5,2.45 15.5,3C15.5,3.55 15.05,4 14.5,4C13.95,4 13.5,3.55 13.5,3C13.5,2.45 13.95,2 14.5,2M17,2C17.55,2 18,2.45 18,3C18,3.55 17.55,4 17,4C16.45,4 16,3.55 16,3C16,2.45 16.45,2 17,2M19.5,2C20.05,2 20.5,2.45 20.5,3C20.5,3.55 20.05,4 19.5,4C18.95,4 18.5,3.55 18.5,3C18.5,2.45 18.95,2 19.5,2M4.5,20C5.05,20 5.5,20.45 5.5,21C5.5,21.55 5.05,22 4.5,22C3.95,22 3.5,21.55 3.5,21C3.5,20.45 3.95,20 4.5,20M7,20C7.55,20 8,20.45 8,21C8,21.55 7.55,22 7,22C6.45,22 6,21.55 6,21C6,20.45 6.45,20 7,20M9.5,20C10.05,20 10.5,20.45 10.5,21C10.5,21.55 10.05,22 9.5,22C8.95,22 8.5,21.55 8.5,21C8.5,20.45 8.95,20 9.5,20M12,20C12.55,20 13,20.45 13,21C13,21.55 12.55,22 12,22C11.45,22 11,21.55 11,21C11,20.45 11.45,20 12,20M14.5,20C15.05,20 15.5,20.45 15.5,21C15.5,21.55 15.05,22 14.5,22C13.95,22 13.5,21.55 13.5,21C13.5,20.45 13.95,20 14.5,20M17,20C17.55,20 18,20.45 18,21C18,21.55 17.55,22 17,22C16.45,22 16,21.55 16,21C16,20.45 16.45,20 17,20M19.5,20C20.05,20 20.5,20.45 20.5,21C20.5,21.55 20.05,22 19.5,22C18.95,22 18.5,21.55 18.5,21C18.5,20.45 18.95,20 19.5,20M3,4H21V6H3V4M3,18H21V20H3V18Z"/>
+                                        </svg>
+                                    </div>
+                                    <span>Dumbbells</span>
+                                </div>
+                            </label>
+
+                            <label class="equipment-card">
+                                <input type="checkbox" name="equipment" value="barbell" class="equipment-input">
+                                <div class="equipment-content">
+                                    <div class="equipment-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M20.57,14.86L22,13.43L20.57,12L17,15.57L8.43,7L12,3.43L10.57,2L9.14,3.43L7.71,2L5.57,4.14L4.14,2.71L2.71,4.14L4.14,5.57L2,7.71L3.43,9.14L2,10.57L3.43,12L7,8.43L15.57,17L12,20.57L13.43,22L14.86,20.57L16.29,22L18.43,19.86L19.86,21.29L21.29,19.86L19.86,18.43L22,16.29L20.57,14.86Z"/>
+                                        </svg>
+                                    </div>
+                                    <span>Barbell & Plates</span>
+                                </div>
+                            </label>
+
+                            <label class="equipment-card">
+                                <input type="checkbox" name="equipment" value="resistance-bands" class="equipment-input">
+                                <div class="equipment-content">
+                                    <div class="equipment-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M20.5,11H19V7C19,5.89 18.1,5 17,5H13V3.5A2.5,2.5 0 0,0 10.5,1A2.5,2.5 0 0,0 8,3.5V5H4A2,2 0 0,0 2,7V10.8H3.5C5,10.8 6.2,12 6.2,13.5C6.2,15 5,16.2 3.5,16.2H2V20A2,2 0 0,0 4,22H7.8V20.5C7.8,19 9,17.8 10.5,17.8C12,17.8 13.2,19 13.2,20.5V22H17A2,2 0 0,0 19,20V16H20.5A2.5,2.5 0 0,0 23,13.5A2.5,2.5 0 0,0 20.5,11Z"/>
+                                        </svg>
+                                    </div>
+                                    <span>Resistance Bands</span>
+                                </div>
+                            </label>
+
+                            <label class="equipment-card">
+                                <input type="checkbox" name="equipment" value="pull-up-bar" class="equipment-input">
+                                <div class="equipment-content">
+                                    <div class="equipment-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M13,5V16L21,5H13M11,5H3L11,16V5M4,6.5L7,10.5V7.5H9V13.5H7V10.5L4,6.5Z"/>
+                                        </svg>
+                                    </div>
+                                    <span>Pull-up Bar</span>
+                                </div>
+                            </label>
+
+                            <label class="equipment-card">
+                                <input type="checkbox" name="equipment" value="kettlebells" class="equipment-input">
+                                <div class="equipment-content">
+                                    <div class="equipment-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M16.2,3.5C16.8,2.9 17.6,2.9 18.2,3.5L20.5,5.8C21.1,6.4 21.1,7.2 20.5,7.8L18.2,10.1C17.6,10.7 16.8,10.7 16.2,10.1L13.9,7.8C13.3,7.2 13.3,6.4 13.9,5.8L16.2,3.5M4,4C2.9,4 2,4.9 2,6V18C2,19.1 2.9,20 4,20H20C21.1,20 22,19.1 22,18V8C22,6.9 21.1,6 20,6H12L10,4H4M7,10C8.1,10 9,10.9 9,12C9,13.1 8.1,14 7,14C5.9,14 5,13.1 5,12C5,10.9 5.9,10 7,10M12,14C13.1,14 14,14.9 14,16C14,17.1 13.1,18 12,18C10.9,18 10,17.1 10,16C10,14.9 10.9,14 12,14M17,10C18.1,10 19,10.9 19,12C19,13.1 18.1,14 17,14C15.9,14 15,13.1 15,12C15,10.9 15.9,10 17,10Z"/>
+                                        </svg>
+                                    </div>
+                                    <span>Kettlebells</span>
+                                </div>
+                            </label>
+
+                            <label class="equipment-card">
+                                <input type="checkbox" name="equipment" value="gym-membership" class="equipment-input">
+                                <div class="equipment-content">
+                                    <div class="equipment-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2M21,9V7L15,3.5C14.18,3.16 13.31,3 12.38,3C11.45,3 10.54,3.16 9.67,3.5L3,7V9L4.14,8.55C4.05,9.09 4,9.64 4,10.2C4,13.26 5.93,15.94 8.67,17.28L10.41,12.6C10.46,12.45 10.37,12.28 10.22,12.23C10.14,12.21 10.06,12.21 9.98,12.23L8.29,12.89L9.51,9.74C9.58,9.57 9.49,9.38 9.32,9.31C9.23,9.28 9.13,9.28 9.05,9.31L6.55,10.4C6.38,10.47 6.28,10.66 6.35,10.83L7.87,14.62L5.1,13.5C4.91,13.43 4.72,13.54 4.65,13.73L3.13,17.5C3.06,17.67 3.16,17.86 3.35,17.93L5.83,18.84C5.95,18.89 6.09,18.87 6.19,18.79L8.5,17.06C9,17.42 9.5,17.73 10,18H10.05C10.14,18.64 10.33,19.27 10.6,19.87L5.17,21.87C4.98,21.94 4.88,22.13 4.95,22.32L5.36,23.45C5.43,23.62 5.62,23.72 5.79,23.65L12,21L18.21,23.65C18.38,23.72 18.57,23.62 18.64,23.45L19.05,22.32C19.12,22.13 19.02,21.94 18.83,21.87L13.4,19.87C13.67,19.27 13.86,18.64 13.95,18H14C14.5,17.73 15,17.42 15.5,17.06L17.81,18.79C17.91,18.87 18.05,18.89 18.17,18.84L20.65,17.93C20.84,17.86 20.94,17.67 20.87,17.5L19.35,13.73C19.28,13.54 19.09,13.43 18.9,13.5L16.13,14.62L17.65,10.83C17.72,10.66 17.62,10.47 17.45,10.4L14.95,9.31C14.78,9.24 14.59,9.34 14.52,9.51L15.74,12.66L14.05,12C13.9,11.95 13.73,12.04 13.68,12.19L11.94,17.46C13.35,17 14.75,16.12 15.81,14.89C17.41,16.33 18.5,18.33 18.5,20.5C18.5,21.05 18.45,21.58 18.36,22.1L21,21V19L15.86,17.7C17.65,16.07 18.5,13.67 18.5,11.2C18.5,10.64 18.45,10.09 18.36,9.55L21,9Z"/>
+                                        </svg>
+                                    </div>
+                                    <span>Full Gym Access</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <a href="auth-signup.html" class="btn btn-secondary">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+                            </svg>
+                            Back
+                        </a>
+                        <div class="action-group">
+                            <button type="button" class="btn btn-secondary" onclick="saveProgress()">
+                                Save Progress
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Continue to Nutrition
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/onboarding.js"></script>
+</body>
+</html>

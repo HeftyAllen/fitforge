@@ -1,0 +1,549 @@
+<!-- workout-builder.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Workout - FitForge</title>
+    <meta name="description" content="Build custom workouts with drag-and-drop exercise selection">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/workouts.css">
+    <link rel="stylesheet" href="assets/css/workout-builder.css">
+</head>
+<body class="dashboard-page workout-builder-page">
+    <div class="app-container">
+         <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <a href="index.html" class="logo">
+                        <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                            <circle cx="16" cy="16" r="4"/>
+                        </svg>
+                        <span class="logo-text">FitForge</span>
+                    </a>
+                </div>
+                
+                                 <nav class="main-nav">
+        <a href="home.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            Dashboard
+        </a>
+        <a href="workouts.html" class="nav-link active">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+            </svg>
+            Workouts
+        </a>
+        <a href="nutrition.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+            Nutrition
+        </a>
+        <a href="running-tracker.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Running Tracker
+        </a>
+        <a href="progress.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+            </svg>
+            Progress
+        </a>
+        <a href="community.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+            </svg>
+            Community
+        </a>
+        <a href="chatbot.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+            </svg>
+            Chatbot
+        </a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn notification-btn" aria-label="Notifications" >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <span class="notification-badge" >3</span>
+        </button>
+        
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+        
+        <div class="user-menu">
+            <button class="user-btn" aria-label="User menu">
+                <img src="assets/images/avatar-placeholder.jpg" alt="User avatar" class="user-avatar">
+                <span class="user-name">Alex Johnson</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="user-dropdown">
+                <a href="profile.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    Settings
+                </a>
+                                       <a href="sync-status.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 12a9 9 0 0114.7-6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M17 2v4h-4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21 12a9 9 0 01-14.7 6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7 22v-4h4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Sync
+</a>
+<a href="export.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3.5" y="13.5" width="17" height="6" rx="1.2"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 3.5v10"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 7.5L12 3.5l3.5 4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Export
+</a>
+                <div class="dropdown-divider"></div>
+                <a href="auth-login.html" class="dropdown-item text-danger">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign Out
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="workout-builder-container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1>Workout Builder</h1>
+                        <p>Build your custom workout by adding exercises from the library</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" id="save-draft-btn">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"/>
+                            </svg>
+                            Save Draft
+                        </button>
+                        <button class="btn btn-secondary" id="schedule-workout-btn">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                            </svg>
+                            Schedule
+                        </button>
+                        <button class="btn btn-primary" id="start-workout-btn">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                            </svg>
+                            Start Workout
+                        </button>
+                    </div>
+                </div>
+
+                <div class="builder-layout">
+                    <!-- Left Panel - Exercise Library -->
+                    <div class="builder-sidebar">
+                        <div class="sidebar-header">
+                            <h3>Exercise Library</h3>
+                            <div class="search-bar">
+                                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                                </svg>
+                                <input type="text" placeholder="Search exercises..." class="search-input" id="exercise-search">
+                            </div>
+                        </div>
+
+                        <!-- Exercise Categories -->
+                        <div class="exercise-categories">
+                            <button class="category-btn active" data-category="all">All</button>
+                            <button class="category-btn" data-category="strength">Strength</button>
+                            <button class="category-btn" data-category="cardio">Cardio</button>
+                            <button class="category-btn" data-category="warmup">Warm-up</button>
+                            <button class="category-btn" data-category="cooldown">Cool-down</button>
+                        </div>
+
+                        <!-- Exercise Filters -->
+                        <div class="exercise-filters">
+                            <select class="filter-select" id="muscle-group-filter">
+                                <option value="">All Muscle Groups</option>
+                                <option value="chest">Chest</option>
+                                <option value="back">Back</option>
+                                <option value="legs">Legs</option>
+                                <option value="shoulders">Shoulders</option>
+                                <option value="arms">Arms</option>
+                                <option value="core">Core</option>
+                            </select>
+                            
+                            <select class="filter-select" id="equipment-filter">
+                                <option value="">All Equipment</option>
+                                <option value="bodyweight">Bodyweight</option>
+                                <option value="dumbbells">Dumbbells</option>
+                                <option value="barbell">Barbell</option>
+                                <option value="machine">Machine</option>
+                                <option value="bands">Resistance Bands</option>
+                            </select>
+                        </div>
+
+                        <!-- Exercise List -->
+                        <div class="exercise-list" id="exercise-library">
+                            <!-- Exercise items will be populated from database -->
+                            <div class="exercise-item" draggable="true" data-exercise-id="1" data-type="strength">
+                                <div class="exercise-drag-handle">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7z"/>
+                                    </svg>
+                                </div>
+                                <div class="exercise-content">
+                                    <div class="exercise-info">
+                                        <h4 class="exercise-name">Barbell Bench Press</h4>
+                                        <div class="exercise-meta">
+                                            <span class="exercise-muscle chest">Chest</span>
+                                            <span class="exercise-equipment">Barbell</span>
+                                        </div>
+                                    </div>
+                                    <button class="exercise-add-btn" data-exercise-id="1">
+                                        <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- More exercise items would be here -->
+                        </div>
+                    </div>
+
+                    <!-- Main Builder Area -->
+                    <div class="builder-main">
+                        <!-- Workout Configuration -->
+                        <div class="workout-config">
+                            <div class="config-group">
+                                <label for="workout-name" class="config-label">Workout Name</label>
+                                <input type="text" id="workout-name" class="config-input" placeholder="Enter workout name" value="My Custom Workout">
+                            </div>
+                            
+                            <div class="config-group">
+                                <label for="workout-description" class="config-label">Description</label>
+                                <textarea id="workout-description" class="config-textarea" placeholder="Describe this workout...">A balanced full-body strength workout focusing on compound movements.</textarea>
+                            </div>
+                            
+                            <div class="config-row">
+                                <div class="config-group">
+                                    <label for="workout-duration" class="config-label">Estimated Duration</label>
+                                    <select id="workout-duration" class="config-select">
+                                        <option value="30">30 minutes</option>
+                                        <option value="45">45 minutes</option>
+                                        <option value="60" selected>60 minutes</option>
+                                        <option value="75">75 minutes</option>
+                                        <option value="90">90 minutes</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="config-group">
+                                    <label for="workout-difficulty" class="config-label">Difficulty</label>
+                                    <select id="workout-difficulty" class="config-select">
+                                        <option value="beginner">Beginner</option>
+                                        <option value="intermediate" selected>Intermediate</option>
+                                        <option value="advanced">Advanced</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workout Structure -->
+                        <div class="workout-structure">
+                            <div class="structure-header">
+                                <h3>Workout Structure</h3>
+                                <div class="structure-actions">
+                                    <button class="btn btn-outline btn-small" id="add-warmup-section">
+                                        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Add Warm-up
+                                    </button>
+                                    <button class="btn btn-outline btn-small" id="add-superset-btn">
+                                        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Add Superset
+                                    </button>
+                                    <button class="btn btn-outline btn-small" id="add-cooldown-section">
+                                        Add Cool-down
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Workout Sections Container -->
+                            <div class="workout-sections" id="workout-sections">
+                                <!-- Warm-up Section -->
+                                <div class="workout-section warmup-section" data-section-type="warmup">
+                                    <div class="section-header">
+                                        <div class="section-title">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                                            </svg>
+                                            Warm-up
+                                            <span class="section-duration">5 min</span>
+                                        </div>
+                                        <div class="section-actions">
+                                            <button class="icon-btn small edit-section" title="Edit section">
+                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="icon-btn small delete-section" title="Delete section">
+                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="section-exercises" data-drop-zone="warmup">
+                                        <div class="drop-zone-placeholder">
+                                            Drag warm-up exercises here or
+                                            <button class="btn-link" id="browse-warmup">Browse warm-up exercises</button>
+                                        </div>
+                                        <!-- Warm-up exercises will appear here -->
+                                    </div>
+                                </div>
+
+                                <!-- Main Workout Section -->
+                                <div class="workout-section main-section" data-section-type="main">
+                                    <div class="section-header">
+                                        <div class="section-title">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                                            </svg>
+                                            Main Workout
+                                            <span class="section-duration">45 min</span>
+                                        </div>
+                                        <div class="section-actions">
+                                            <button class="icon-btn small add-exercise-btn" title="Add exercise">
+                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="section-exercises" data-drop-zone="main">
+                                        <div class="drop-zone-placeholder">
+                                            Drag exercises here or 
+                                            <button class="btn-link" id="browse-exercises">Browse exercises</button>
+                                        </div>
+                                        <!-- Exercises will appear here -->
+                                    </div>
+                                </div>
+
+                                <!-- Cool-down Section -->
+                                <div class="workout-section cooldown-section" data-section-type="cooldown">
+                                    <div class="section-header">
+                                        <div class="section-title">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/>
+                                            </svg>
+                                            Cool-down
+                                            <span class="section-duration">5 min</span>
+                                        </div>
+                                        <div class="section-actions">
+                                            <button class="icon-btn small edit-section" title="Edit section">
+                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="icon-btn small delete-section" title="Delete section">
+                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="section-exercises" data-drop-zone="cooldown">
+                                        <div class="drop-zone-placeholder">
+                                            Drag cool-down exercises here or
+                                            <button class="btn-link" id="browse-cooldown">Browse cool-down exercises</button>
+                                        </div>
+                                        <!-- Cool-down exercises will appear here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workout Summary -->
+                        <div class="workout-summary">
+                            <div class="summary-header">
+                                <h3>Workout Summary</h3>
+                                <button class="btn btn-outline btn-small" id="edit-summary-btn">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                    </svg>
+                                    Edit
+                                </button>
+                            </div>
+                            <div class="summary-content">
+                                <div class="summary-stats">
+                                    <div class="summary-stat">
+                                        <span class="stat-value" id="total-exercises">0</span>
+                                        <span class="stat-label">Exercises</span>
+                                    </div>
+                                    <div class="summary-stat">
+                                        <span class="stat-value" id="total-duration">55</span>
+                                        <span class="stat-label">Minutes</span>
+                                    </div>
+                                    <div class="summary-stat">
+                                        <span class="stat-value" id="total-sets">0</span>
+                                        <span class="stat-label">Sets</span>
+                                    </div>
+                                    <div class="summary-stat">
+                                        <span class="stat-value" id="workout-level">Intermediate</span>
+                                        <span class="stat-label">Difficulty</span>
+                                    </div>
+                                </div>
+                                <div class="summary-muscles">
+                                    <h4>Muscle Groups Targeted</h4>
+                                    <div class="muscle-tags" id="muscle-tags">
+                                        <span class="muscle-tag chest">Chest</span>
+                                        <span class="muscle-tag legs">Legs</span>
+                                        <span class="muscle-tag back">Back</span>
+                                        <!-- More muscle tags will appear here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Exercise Configuration Modal -->
+    <div class="modal" id="exercise-config-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Configure Exercise</h2>
+                <button class="modal-close" id="close-exercise-config">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="exercise-preview">
+                    <h3 id="config-exercise-name">Exercise Name</h3>
+                    <div class="exercise-meta">
+                        <span class="meta-tag" id="config-exercise-muscle">Muscle</span>
+                        <span class="meta-tag" id="config-exercise-equipment">Equipment</span>
+                    </div>
+                </div>
+                <div class="config-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="exercise-sets" class="form-label">Sets</label>
+                            <input type="number" id="exercise-sets" class="form-input" value="3" min="1" max="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="exercise-reps" class="form-label">Reps</label>
+                            <input type="text" id="exercise-reps" class="form-input" value="8-12" placeholder="8-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exercise-rest" class="form-label">Rest Time (seconds)</label>
+                        <input type="number" id="exercise-rest" class="form-input" value="90" min="0" max="300">
+                    </div>
+                    <div class="form-group">
+                        <label for="exercise-notes" class="form-label">Notes</label>
+                        <textarea id="exercise-notes" class="form-textarea" placeholder="Add any notes about this exercise..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-exercise-config">Cancel</button>
+                <button class="btn btn-primary" id="save-exercise-config">Add to Workout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Workout Modal -->
+    <div class="modal" id="schedule-workout-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Schedule Workout</h2>
+                <button class="modal-close" id="close-schedule-modal">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="schedule-date" class="form-label">Date</label>
+                    <input type="date" id="schedule-date" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="schedule-time" class="form-label">Time</label>
+                    <input type="time" id="schedule-time" class="form-input" value="18:00">
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="add-to-calendar" checked>
+                        <span class="checkmark"></span>
+                        Add to my calendar
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="set-reminder">
+                        <span class="checkmark"></span>
+                        Set reminder (30 minutes before)
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-schedule">Cancel</button>
+                <button class="btn btn-primary" id="confirm-schedule">Schedule Workout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/workout-builder.js"></script>
+</body>
+</html>

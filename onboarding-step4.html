@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Profile - FitForge</title>
+    <meta name="description" content="Add your measurements to complete your profile">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/onboarding.css">
+</head>
+<body class="onboarding-page">
+    <div class="onboarding-container">
+        <!-- Progress Header -->
+        <header class="onboarding-header">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                        <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                        <circle cx="16" cy="16" r="4"/>
+                    </svg>
+                    <span class="logo-text">FitForge</span>
+                </a>
+                <div class="onboarding-progress">
+                    <div class="progress-steps">
+                        <div class="step completed" data-step="1">
+                            <div class="step-number">1</div>
+                            <span class="step-label">Goals</span>
+                        </div>
+                        <div class="step completed" data-step="2">
+                            <div class="step-number">2</div>
+                            <span class="step-label">Nutrition</span>
+                        </div>
+                        <div class="step completed" data-step="3">
+                            <div class="step-number">3</div>
+                            <span class="step-label">Health</span>
+                        </div>
+                        <div class="step active" data-step="4">
+                            <div class="step-number">4</div>
+                            <span class="step-label">Finish</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+                    <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="onboarding-content">
+            <div class="onboarding-card">
+                <div class="card-header">
+                    <h1>Complete Your Profile</h1>
+                    <p>Add measurements so we can calculate calories and track progress accurately</p>
+                </div>
+
+                <form class="onboarding-form" id="step4-form">
+                    <!-- Basic Measurements -->
+                    <div class="form-section">
+                        <h2 class="section-title">Body Measurements</h2>
+                        <p class="section-description">This helps us personalize your calorie and macro targets</p>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="weight" class="form-label">Weight</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="weight" name="weight" class="form-input" placeholder="75" min="20" max="500" required>
+                                    <span class="input-unit">kg</span>
+                                </div>
+                                <div class="form-hint">Units based on your preferences. Change in settings later.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="height" class="form-label">Height</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="height" name="height" class="form-input" placeholder="180" min="80" max="250" required>
+                                    <span class="input-unit">cm</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" id="age" name="age" class="form-input" placeholder="29" min="13" max="120" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Goals -->
+                    <div class="form-section">
+                        <h2 class="section-title">Weekly Goal</h2>
+                        
+                        <div class="form-group">
+                            <label for="weekly_goal" class="form-label">Preferred Weekly Goal (Optional)</label>
+                            <select id="weekly_goal" name="weekly_goal" class="form-select">
+                                <option value="">Keep previous choice</option>
+                                <option value="maintain">Maintain weight</option>
+                                <option value="lose">Lose weight</option>
+                                <option value="gain">Gain weight</option>
+                            </select>
+                            <div class="form-hint">You can adjust this anytime in your settings</div>
+                        </div>
+
+                        <!-- Optional Body Measurements -->
+                        <div class="form-group">
+                            <label class="form-label">Additional Measurements (Optional)</label>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="neck" class="form-label">Neck</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="neck" name="neck" class="form-input" placeholder="38" min="20" max="80">
+                                        <span class="input-unit">cm</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="waist" class="form-label">Waist</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="waist" name="waist" class="form-input" placeholder="86" min="40" max="200">
+                                        <span class="input-unit">cm</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="hip" class="form-label">Hip</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="hip" name="hip" class="form-input" placeholder="102" min="40" max="200">
+                                        <span class="input-unit">cm</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-hint">These help track body composition changes more accurately</div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Completion -->
+                    <div class="form-section">
+                        <h2 class="section-title">Almost There!</h2>
+                        
+                        <div class="completion-summary">
+                            <div class="summary-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                                <span>Goals & Preferences Set</span>
+                            </div>
+                            <div class="summary-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                                <span>Nutrition Plan Ready</span>
+                            </div>
+                            <div class="summary-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                                <span>Health Considerations Added</span>
+                            </div>
+                            <div class="summary-item current">
+                                <span>4</span>
+                                <span>Complete Profile Setup</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="consent" name="consent" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="terms.html" class="form-link">Terms of Service</a> and <a href="privacy.html" class="form-link">Privacy Policy</a>
+                            </label>
+                            <div class="form-error" id="consent-error"></div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <a href="onboarding-step3.html" class="btn btn-secondary">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+                            </svg>
+                            Back to Health
+                        </a>
+                        <div class="action-group">
+                            <button type="button" class="btn btn-secondary" onclick="saveProgress()">
+                                Save Progress
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Finish & Start Using FitForge
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="step4-msg" role="status" aria-live="polite" class="form-message" style="display: none"></div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/onboarding.js"></script>
+    <script>
+        // Update the saveProgress and finishOnboarding functions to match the new structure
+        function saveProgress() {
+            const form = document.getElementById('step4-form');
+            const data = {
+                weight: form.weight.value,
+                height: form.height.value,
+                age: form.age.value,
+                weekly_goal: form.weekly_goal.value,
+                neck: form.neck?.value,
+                waist: form.waist?.value,
+                hip: form.hip?.value,
+                consent: form.consent.checked
+            };
+            
+            localStorage.setItem('onboard_step4', JSON.stringify(data));
+            
+            const message = document.getElementById('step4-msg');
+            message.style.display = 'block';
+            message.textContent = 'Progress saved successfully!';
+            message.className = 'form-message success';
+            
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 3000);
+        }
+
+        function finishOnboarding(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('step4-form');
+            const message = document.getElementById('step4-msg');
+            
+            // Basic validation
+            if (!form.consent.checked) {
+                message.style.display = 'block';
+                message.textContent = 'Please agree to the Terms of Service and Privacy Policy';
+                message.className = 'form-message error';
+                return;
+            }
+            
+            if (!form.weight.value || !form.height.value || !form.age.value) {
+                message.style.display = 'block';
+                message.textContent = 'Please fill in all required measurements';
+                message.className = 'form-message error';
+                return;
+            }
+
+            // Collect all steps
+            const step1 = JSON.parse(localStorage.getItem('onboard_step1') || '{}');
+            const step2 = JSON.parse(localStorage.getItem('onboard_step2') || '{}');
+            const step3 = JSON.parse(localStorage.getItem('onboard_step3') || '{}');
+            const step4 = {
+                weight: form.weight.value,
+                height: form.height.value,
+                age: form.age.value,
+                weekly_goal: form.weekly_goal.value,
+                neck: form.neck?.value,
+                waist: form.waist?.value,
+                hip: form.hip?.value
+            };
+
+            // Age validation
+            if (step4.age && Number(step4.age) < 13) {
+                message.style.display = 'block';
+                message.textContent = 'You must be at least 13 years old to create an account.';
+                message.className = 'form-message error';
+                return;
+            }
+
+            // Combine into profile
+            const profile = {
+                createdAt: new Date().toISOString(),
+                step1,
+                step2,
+                step3,
+                step4
+            };
+
+            localStorage.setItem('onboard_profile', JSON.stringify(profile));
+
+            // Show success and redirect
+            message.style.display = 'block';
+            message.textContent = 'Profile completed! Redirecting to your dashboard...';
+            message.className = 'form-message success';
+
+            setTimeout(() => {
+                localStorage.removeItem('onboard_step1');
+                localStorage.removeItem('onboard_step2');
+                localStorage.removeItem('onboard_step3');
+                localStorage.removeItem('onboard_step4');
+                window.location.href = 'home.html';
+            }, 2000);
+        }
+
+        // Attach form submit handler
+        document.getElementById('step4-form').addEventListener('submit', finishOnboarding);
+
+        // Load previous progress if available
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                const saved = JSON.parse(localStorage.getItem('onboard_step4') || '{}');
+                if (saved.weight) document.getElementById('weight').value = saved.weight;
+                if (saved.height) document.getElementById('height').value = saved.height;
+                if (saved.age) document.getElementById('age').value = saved.age;
+                if (saved.weekly_goal) document.getElementById('weekly_goal').value = saved.weekly_goal;
+                if (saved.neck) document.getElementById('neck').value = saved.neck;
+                if (saved.waist) document.getElementById('waist').value = saved.waist;
+                if (saved.hip) document.getElementById('hip').value = saved.hip;
+                if (saved.consent) document.getElementById('consent').checked = saved.consent;
+            } catch(e) {
+                console.log('No previous progress found');
+            }
+        });
+    </script>
+</body>
+</html>

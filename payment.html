@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - FitForge</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/payment.css">
+    <!-- Stripe.js for card payments -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=ZAR"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <a href="home.html" class="logo">
+                        <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                            <circle cx="16" cy="16" r="4"/>
+                        </svg>
+                        <span class="logo-text">FitForge</span>
+                    </a>
+                </div>
+                     <nav class="main-nav">
+        <a href="home.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            Dashboard
+        </a>
+        <a href="workouts.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+            </svg>
+            Workouts
+        </a>
+        <a href="nutrition.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+            Nutrition
+        </a>
+        <a href="running-tracker.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Running Tracker
+        </a>
+        <a href="progress.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+            </svg>
+            Progress
+        </a>
+        <a href="community.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+            </svg>
+            Community
+        </a>
+        <a href="chatbot.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+            </svg>
+            Chatbot
+        </a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn notification-btn" aria-label="Notifications" >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <span class="notification-badge" >3</span>
+        </button>
+        
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+        
+        <div class="user-menu">
+            <button class="user-btn" aria-label="User menu">
+                <img src="assets/images/avatar-placeholder.jpg" alt="User avatar" class="user-avatar">
+                <span class="user-name">Alex Johnson</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="user-dropdown">
+                <a href="profile.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    Settings
+                </a>
+                                       <a href="sync-status.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 12a9 9 0 0114.7-6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M17 2v4h-4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21 12a9 9 0 01-14.7 6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7 22v-4h4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Sync
+</a>
+<a href="export.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3.5" y="13.5" width="17" height="6" rx="1.2"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 3.5v10"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 7.5L12 3.5l3.5 4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Export
+</a>
+                <div class="dropdown-divider"></div>
+                <a href="auth-login.html" class="dropdown-item text-danger">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign Out
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="payment-container">
+                <div class="payment-header">
+                    <h1 class="page-title">Complete Your Purchase</h1>
+                    <p class="page-subtitle">Choose your plan and preferred payment method</p>
+                    <div class="currency-selector">
+                        <span>Currency:</span>
+                        <select id="currency-select" class="currency-dropdown">
+                            <option value="ZAR" selected>ZAR (South African Rand)</option>
+                            <option value="USD">USD (US Dollar)</option>
+                            <option value="EUR">EUR (Euro)</option>
+                            <option value="GBP">GBP (British Pound)</option>
+                            <option value="AUD">AUD (Australian Dollar)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="payment-content">
+                    <!-- Plan Selection -->
+                    <div class="plan-selection">
+                        <h2>Select Your Plan</h2>
+                        <div class="plan-options">
+                            <div class="plan-option" data-plan="starter">
+                                <input type="radio" id="plan-starter" name="plan" value="starter" checked>
+                                <label for="plan-starter">
+                                    <span class="plan-name">Starter</span>
+                                    <span class="plan-price">R99<span class="period">/month</span></span>
+                                    <span class="plan-description">Perfect for beginners</span>
+                                </label>
+                            </div>
+                            <div class="plan-option" data-plan="pro">
+                                <input type="radio" id="plan-pro" name="plan" value="pro">
+                                <label for="plan-pro">
+                                    <span class="plan-name">Pro</span>
+                                    <span class="plan-price">R199<span class="period">/month</span></span>
+                                    <span class="plan-description">Most popular</span>
+                                </label>
+                            </div>
+                            <div class="plan-option" data-plan="elite">
+                                <input type="radio" id="plan-elite" name="plan" value="elite">
+                                <label for="plan-elite">
+                                    <span class="plan-name">Elite</span>
+                                    <span class="plan-price">R399<span class="period">/month</span></span>
+                                    <span class="plan-description">For serious athletes</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div class="payment-methods-section">
+                        <h2>Choose Payment Method</h2>
+                        
+                        <div class="payment-methods-tabs">
+                            <div class="tab-buttons">
+                                <button class="tab-button active" data-tab="card">💳 Credit/Debit Card</button>
+                                <button class="tab-button" data-tab="paypal">🅿️ PayPal</button>
+                                <button class="tab-button" data-tab="bank">🏦 Bank Transfer</button>
+                                <button class="tab-button" data-tab="mobile">📱 Mobile Money</button>
+                                <button class="tab-button" data-tab="crypto">₿ Cryptocurrency</button>
+                            </div>
+
+                            <!-- Card Payment Tab -->
+                            <div class="tab-content active" id="tab-card">
+                                <div class="payment-form">
+                                    <div class="form-group">
+                                        <label for="card-number" class="form-label">Card Number</label>
+                                        <div class="card-input-wrapper">
+                                            <input type="text" id="card-number" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19">
+                                            <div class="card-icons">
+                                                <span class="card-icon visa" title="Visa">💳</span>
+                                                <span class="card-icon mastercard" title="Mastercard">💳</span>
+                                                <span class="card-icon amex" title="American Express">💳</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="expiry-date" class="form-label">Expiry Date</label>
+                                            <input type="text" id="expiry-date" class="form-input" placeholder="MM/YY" maxlength="5">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cvc" class="form-label">CVC</label>
+                                            <input type="text" id="cvc" class="form-input" placeholder="123" maxlength="4">
+                                            <div class="cvc-hint">
+                                                <button type="button" class="hint-btn" aria-label="What is CVC?">
+                                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                                                    </svg>
+                                                </button>
+                                                <div class="hint-tooltip">
+                                                    <p>3 digits on back of card</p>
+                                                    <p>4 digits on front for Amex</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="cardholder-name" class="form-label">Cardholder Name</label>
+                                        <input type="text" id="cardholder-name" class="form-input" placeholder="John Doe">
+                                    </div>
+
+                                    <div class="billing-address">
+                                        <h3>Billing Address</h3>
+                                        <div class="form-group">
+                                            <label for="country" class="form-label">Country</label>
+                                            <select id="country" class="form-select">
+                                                <option value="">Select Country</option>
+                                                <option value="ZA" selected>South Africa</option>
+                                                <option value="US">United States</option>
+                                                <option value="GB">United Kingdom</option>
+                                                <option value="CA">Canada</option>
+                                                <option value="AU">Australia</option>
+                                                <option value="DE">Germany</option>
+                                                <option value="FR">France</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="postal-code" class="form-label">Postal Code</label>
+                                            <input type="text" id="postal-code" class="form-input" placeholder="1234">
+                                        </div>
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary btn-large btn-full payment-submit" data-method="card">
+                                        <span class="btn-text">Pay with Card</span>
+                                        <span class="btn-loading">
+                                            <svg class="loading-spinner" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M10 3c0-.6-.4-1-1-1s-1 .4-1 1v2c0 .6.4 1 1 1s1-.4 1-1V3zM15.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l1.4 1.4c.4.4 1 .4 1.4 0s.4-1 0-1.4L15.7 7.3zM7 10c0-.6-.4-1-1-1H3c-.6 0-1 .4-1 1s.4 1 1 1h3c.6 0 1-.4 1-1zm10 0c0-.6-.4-1-1-1h-3c-.6 0-1 .4-1 1s.4 1 1 1h3c.6 0 1-.4 1-1zm-9.3 4.3c.4.4 1 .4 1.4 0s.4-1 0-1.4L7.3 12c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l1.4 1.4zM17 13c.6 0 1-.4 1-1s-.4-1-1-1-1 .4-1 1 .4 1 1 1zm-7 3c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1s-1 .4-1 1v2c0 .6.4 1 1 1z"/>
+                                            </svg>
+                                            Processing...
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- PayPal Tab -->
+                            <div class="tab-content" id="tab-paypal">
+                                <div class="alternative-payment">
+                                    <div class="payment-logo large">
+                                        <span>🅿️</span>
+                                        <span>PayPal</span>
+                                    </div>
+                                    <p>You will be redirected to PayPal to complete your payment securely.</p>
+                                    <div class="payment-benefits">
+                                        <div class="benefit">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span>Pay with your PayPal balance or card</span>
+                                        </div>
+                                        <div class="benefit">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span>Buyer protection included</span>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-paypal btn-large btn-full payment-submit" data-method="paypal">
+                                        Continue with PayPal
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Bank Transfer Tab -->
+                            <div class="tab-content" id="tab-bank">
+                                <div class="alternative-payment">
+                                    <div class="payment-logo large">
+                                        <span>🏦</span>
+                                        <span>Bank Transfer</span>
+                                    </div>
+                                    <p>Make a direct bank transfer using the details below. Your account will be activated once payment is confirmed.</p>
+                                    
+                                    <div class="bank-details">
+                                        <h4>Banking Details (South Africa)</h4>
+                                        <div class="bank-info">
+                                            <div class="bank-field">
+                                                <span class="field-label">Bank:</span>
+                                                <span class="field-value">Standard Bank</span>
+                                            </div>
+                                            <div class="bank-field">
+                                                <span class="field-label">Account Name:</span>
+                                                <span class="field-value">FitForge (Pty) Ltd</span>
+                                            </div>
+                                            <div class="bank-field">
+                                                <span class="field-label">Account Number:</span>
+                                                <span class="field-value">0123456789</span>
+                                            </div>
+                                            <div class="bank-field">
+                                                <span class="field-label">Branch Code:</span>
+                                                <span class="field-value">051001</span>
+                                            </div>
+                                            <div class="bank-field">
+                                                <span class="field-label">Reference:</span>
+                                                <span class="field-value" id="bank-reference">FF123456</span>
+                                                <button class="copy-btn" data-clipboard-target="#bank-reference">
+                                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/>
+                                                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bank-details">
+                                        <h4>International Bank Transfer (SWIFT)</h4>
+                                        <div class="bank-info">
+                                            <div class="bank-field">
+                                                <span class="field-label">SWIFT/BIC:</span>
+                                                <span class="field-value">SBZAZAJJ</span>
+                                            </div>
+                                            <div class="bank-field">
+                                                <span class="field-label">IBAN:</span>
+                                                <span class="field-value">ZA12345678901234567890</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="payment-instructions">
+                                        <h4>Instructions:</h4>
+                                        <ol>
+                                            <li>Use the reference number above when making payment</li>
+                                            <li>Email proof of payment to payments@fitforge.com</li>
+                                            <li>Allow 1-2 business days for payment confirmation</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Money Tab -->
+                            <div class="tab-content" id="tab-mobile">
+                                <div class="alternative-payment">
+                                    <div class="payment-logo large">
+                                        <span>📱</span>
+                                        <span>Mobile Money</span>
+                                    </div>
+                                    <p>Pay using your mobile money wallet. Available in supported countries.</p>
+                                    
+                                    <div class="mobile-providers">
+                                        <h4>Select Your Provider</h4>
+                                        <div class="provider-options">
+                                            <div class="provider-option">
+                                                <input type="radio" id="provider-mpesa" name="mobile-provider" value="mpesa">
+                                                <label for="provider-mpesa">
+                                                    <span class="provider-logo">📱</span>
+                                                    <span class="provider-name">M-Pesa</span>
+                                                    <span class="provider-countries">Kenya, Tanzania</span>
+                                                </label>
+                                            </div>
+                                            <div class="provider-option">
+                                                <input type="radio" id="provider-momo" name="mobile-provider" value="momo">
+                                                <label for="provider-momo">
+                                                    <span class="provider-logo">📱</span>
+                                                    <span class="provider-name">MTN Mobile Money</span>
+                                                    <span class="provider-countries">Ghana, Uganda, Rwanda</span>
+                                                </label>
+                                            </div>
+                                            <div class="provider-option">
+                                                <input type="radio" id="provider-ozow" name="mobile-provider" value="ozow">
+                                                <label for="provider-ozow">
+                                                    <span class="provider-logo">📱</span>
+                                                    <span class="provider-name">Ozow</span>
+                                                    <span class="provider-countries">South Africa</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mobile-number" class="form-label">Mobile Number</label>
+                                        <input type="tel" id="mobile-number" class="form-input" placeholder="+27 12 345 6789">
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary btn-large btn-full payment-submit" data-method="mobile" disabled>
+                                        Continue to Mobile Payment
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Cryptocurrency Tab -->
+                            <div class="tab-content" id="tab-crypto">
+                                <div class="alternative-payment">
+                                    <div class="payment-logo large">
+                                        <span>₿</span>
+                                        <span>Cryptocurrency</span>
+                                    </div>
+                                    <p>Pay with Bitcoin, Ethereum, or other cryptocurrencies. Fast and secure.</p>
+                                    
+                                    <div class="crypto-options">
+                                        <h4>Select Cryptocurrency</h4>
+                                        <div class="crypto-grid">
+                                            <div class="crypto-option" data-crypto="bitcoin">
+                                                <input type="radio" id="crypto-btc" name="crypto" value="btc">
+                                                <label for="crypto-btc">
+                                                    <span class="crypto-logo">₿</span>
+                                                    <span class="crypto-name">Bitcoin (BTC)</span>
+                                                </label>
+                                            </div>
+                                            <div class="crypto-option" data-crypto="ethereum">
+                                                <input type="radio" id="crypto-eth" name="crypto" value="eth">
+                                                <label for="crypto-eth">
+                                                    <span class="crypto-logo">Ξ</span>
+                                                    <span class="crypto-name">Ethereum (ETH)</span>
+                                                </label>
+                                            </div>
+                                            <div class="crypto-option" data-crypto="litecoin">
+                                                <input type="radio" id="crypto-ltc" name="crypto" value="ltc">
+                                                <label for="crypto-ltc">
+                                                    <span class="crypto-logo">Ł</span>
+                                                    <span class="crypto-name">Litecoin (LTC)</span>
+                                                </label>
+                                            </div>
+                                            <div class="crypto-option" data-crypto="usdc">
+                                                <input type="radio" id="crypto-usdc" name="crypto" value="usdc">
+                                                <label for="crypto-usdc">
+                                                    <span class="crypto-logo">💵</span>
+                                                    <span class="crypto-name">USD Coin (USDC)</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="crypto-payment-info" id="crypto-payment-info" style="display: none;">
+                                        <h4>Payment Address</h4>
+                                        <div class="crypto-address">
+                                            <code id="crypto-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+                                            <button class="copy-btn" data-clipboard-target="#crypto-address">
+                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/>
+                                                    <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="crypto-amount">
+                                            <span>Amount:</span>
+                                            <strong id="crypto-amount">0.0021 BTC</strong>
+                                        </div>
+                                        <div class="crypto-qr">
+                                            <div class="qr-placeholder">
+                                                <span>QR Code will appear here</span>
+                                            </div>
+                                        </div>
+                                        <p class="crypto-note"><small>Send exact amount to the address above. Payment will be confirmed after 3 network confirmations.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms and Security -->
+                        <div class="payment-security">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terms-agreement" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="terms.html" target="_blank" class="form-link">Terms of Service</a> and <a href="privacy.html" target="_blank" class="form-link">Privacy Policy</a>
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="marketing-consent">
+                                <span class="checkmark"></span>
+                                Send me fitness tips and special offers (optional)
+                            </label>
+
+                            <div class="security-badges">
+                                <div class="security-badge">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span>Secure SSL Encryption</span>
+                                </div>
+                                <div class="security-badge">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span>PCI DSS Compliant</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="order-summary">
+                        <div class="summary-card">
+                            <h3>Order Summary</h3>
+                            
+                            <div class="summary-plan">
+                                <div class="plan-details">
+                                    <span class="plan-name-selected">Starter Plan</span>
+                                    <span class="plan-price-selected">R99/month</span>
+                                </div>
+                                <div class="billing-cycle">
+                                    <span>Billed monthly</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-features">
+                                <h4>What's included:</h4>
+                                <ul class="features-list">
+                                    <li>✓ Basic workout plans</li>
+                                    <li>✓ Nutrition tracking</li>
+                                    <li>✓ Progress analytics</li>
+                                    <li>✓ Community access</li>
+                                </ul>
+                            </div>
+
+                            <div class="summary-total">
+                                <div class="total-line">
+                                    <span>Subtotal</span>
+                                    <span class="amount">R99.00</span>
+                                </div>
+                                <div class="total-line">
+                                    <span>VAT (15%)</span>
+                                    <span class="amount">R14.85</span>
+                                </div>
+                                <div class="total-line total">
+                                    <span>Total due today</span>
+                                    <span class="amount">R113.85</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-benefits">
+                                <div class="benefit">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span>14-day free trial</span>
+                                </div>
+                                <div class="benefit">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span>Cancel anytime</span>
+                                </div>
+                                <div class="benefit">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span>No setup fees</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="support-section">
+                            <h4>Need help?</h4>
+                            <p>Contact our support team:</p>
+                            <a href="mailto:support@fitforge.com" class="support-link">support@fitforge.com</a>
+                            <a href="tel:+27111234567" class="support-link">+27 11 123 4567</a>
+                            <div class="support-hours">
+                                <small>Mon-Fri: 8:00-17:00 SAST</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/payment.js"></script>
+</body>
+</html>

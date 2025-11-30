@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Progress - FitForge</title>
+    <meta name="description" content="Add new progress measurements and achievements">
+    <link rel="stylesheet" href="assets/css/styles.css">
+          <link rel="stylesheet" href="assets/css/progress.css">
+</head>
+<body class="dashboard-page">
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <a href="home.html" class="logo">FitForge</a>
+                </div>
+                
+                     <nav class="main-nav">
+        <a href="home.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            Dashboard
+        </a>
+        <a href="workouts.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+            </svg>
+            Workouts
+        </a>
+        <a href="nutrition.html" class="nav-link active">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+            Nutrition
+        </a>
+        <a href="running-tracker.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Running Tracker
+        </a>
+        <a href="progress.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+            </svg>
+            Progress
+        </a>
+        <a href="community.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+            </svg>
+            Community
+        </a>
+        <a href="chatbot.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+            </svg>
+            Chatbot
+        </a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn notification-btn" aria-label="Notifications" >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <span class="notification-badge" >3</span>
+        </button>
+        
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+        
+        <div class="user-menu">
+            <button class="user-btn" aria-label="User menu">
+                <img src="assets/images/avatar-placeholder.jpg" alt="User avatar" class="user-avatar">
+                <span class="user-name">Alex Johnson</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="user-dropdown">
+                <a href="profile.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    Settings
+                </a>
+                                       <a href="sync-status.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 12a9 9 0 0114.7-6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M17 2v4h-4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21 12a9 9 0 01-14.7 6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7 22v-4h4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Sync
+</a>
+<a href="export.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3.5" y="13.5" width="17" height="6" rx="1.2"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 3.5v10"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 7.5L12 3.5l3.5 4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Export
+</a>
+                <div class="dropdown-divider"></div>
+                <a href="auth-login.html" class="dropdown-item text-danger">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign Out
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="log-entry-container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1>Log Progress</h1>
+                        <p>Track your measurements, achievements, and personal records</p>
+                    </div>
+                    <div class="header-actions">
+                        <a href="progress.html" class="btn btn-secondary">Back to Progress</a>
+                    </div>
+                </div>
+
+                <div class="log-entry-content">
+                    <form class="log-form" id="progress-form">
+                        <!-- Log Type Selection -->
+                        <div class="form-section">
+                            <h2 class="section-title">Log Type</h2>
+                            <div class="log-type-grid">
+                                <label class="log-type-card">
+                                    <input type="radio" name="logType" value="measurements" class="log-type-input" checked>
+                                    <div class="log-type-content">
+                                        <div class="log-type-icon">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6Z"/>
+                                            </svg>
+                                        </div>
+                                        <h3>Body Measurements</h3>
+                                        <p>Weight, body fat, and circumference measurements</p>
+                                    </div>
+                                </label>
+
+                                <label class="log-type-card">
+                                    <input type="radio" name="logType" value="strength" class="log-type-input">
+                                    <div class="log-type-content">
+                                        <div class="log-type-icon">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2ZM21,9V7H15V9H21ZM18,12C19.1,12 20,12.9 20,14C20,15.1 19.1,16 18,16C16.9,16 16,15.1 16,14C16,12.9 16.9,12 18,12ZM6,12C7.1,12 8,12.9 8,14C8,15.1 7.1,16 6,16C4.9,16 4,15.1 4,14C4,12.9 4.9,12 6,12ZM21,17V15H15V17H21ZM12,18C13.1,18 14,18.9 14,20C14,21.1 13.1,22 12,22C10.9,22 10,21.1 10,20C10,18.9 10.9,18 12,18Z"/>
+                                            </svg>
+                                        </div>
+                                        <h3>Strength PR</h3>
+                                        <p>Personal records for lifts and exercises</p>
+                                    </div>
+                                </label>
+
+                                <label class="log-type-card">
+                                    <input type="radio" name="logType" value="performance" class="log-type-input">
+                                    <div class="log-type-content">
+                                        <div class="log-type-icon">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M13.5,5.5C14.59,5.5 15.5,4.58 15.5,3.5C15.5,2.38 14.59,1.5 13.5,1.5C12.39,1.5 11.5,2.38 11.5,3.5C11.5,4.58 12.39,5.5 13.5,5.5M9.89,19.38L10.89,18L13,17L11.31,15.28C10.5,15.81 10,16.62 10,17.5C10,18.39 10.5,19.19 11.31,19.72L9.89,19.38M22,13V15H18L16.59,13.59L17.71,12.46C17.5,12 17,11.54 16.39,11.19C15.77,10.84 15.05,10.68 14.29,10.72C13.11,10.82 12.07,11.29 11.27,12.04C10.5,12.81 10.03,13.83 10,15H12C12.08,14.19 12.5,13.44 13.13,12.93C13.77,12.41 14.6,12.08 15.5,12C16.43,12.09 17.31,12.46 18,13C18.69,13.54 19.19,14.28 19.47,15H17C16.5,15 16,15.5 16,16V18C16,18.5 16.5,19 17,19H22C22.5,19 23,18.5 23,18V16C23,15.5 22.5,15 22,15H20C20,13.9 19.5,12.9 18.7,12.21C17.9,11.5 16.8,11.15 15.6,11.15C14.8,11.15 14,11.3 13.28,11.6C12.56,11.9 11.94,12.35 11.44,12.93C10.94,13.5 10.58,14.19 10.41,14.92L8.91,11.82C9.71,11.34 10.05,10.54 10.05,9.5C10.05,8.4 9.66,7.5 8.87,6.81C8.08,6.12 7.1,5.75 5.94,5.75C4.78,5.75 3.81,6.12 3.02,6.81C2.23,7.5 1.84,8.4 1.84,9.5C1.84,10.45 2.17,11.25 2.83,11.9C3.5,12.55 4.3,12.9 5.24,12.9C5.8,12.9 6.32,12.75 6.8,12.45L8.91,16.5L7,21H15L17.7,15.5L22,13Z"/>
+                                            </svg>
+                                        </div>
+                                        <h3>Performance</h3>
+                                        <p>Endurance, speed, and athletic performance</p>
+                                    </div>
+                                </label>
+
+                                <label class="log-type-card">
+                                    <input type="radio" name="logType" value="photos" class="log-type-input">
+                                    <div class="log-type-content">
+                                        <div class="log-type-icon">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/>
+                                            </svg>
+                                        </div>
+                                        <h3>Progress Photos</h3>
+                                        <p>Visual progress tracking with photos</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Date and Notes -->
+                        <div class="form-section">
+                            <h2 class="section-title">Log Details</h2>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="log-date" class="form-label">Date</label>
+                                    <input type="date" id="log-date" name="logDate" class="form-input" value="" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="log-time" class="form-label">Time</label>
+                                    <input type="time" id="log-time" name="logTime" class="form-input" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="log-notes" class="form-label">Notes (Optional)</label>
+                                <textarea id="log-notes" name="logNotes" class="form-textarea" placeholder="Add any notes about this progress entry..." rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Body Measurements Section -->
+                        <div class="form-section" id="measurements-section">
+                            <h2 class="section-title">Body Measurements</h2>
+                            <div class="measurements-grid">
+                                <div class="form-group">
+                                    <label for="weight" class="form-label">Weight</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="weight" name="weight" class="form-input" placeholder="0.0" step="0.1">
+                                        <span class="input-unit">lbs</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="body-fat" class="form-label">Body Fat %</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="body-fat" name="bodyFat" class="form-input" placeholder="0.0" step="0.1">
+                                        <span class="input-unit">%</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="chest" class="form-label">Chest</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="chest" name="chest" class="form-input" placeholder="0.0" step="0.1">
+                                        <span class="input-unit">in</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="waist" class="form-label">Waist</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="waist" name="waist" class="form-input" placeholder="0.0" step="0.1">
+                                        <span class="input-unit">in</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="hips" class="form-label">Hips</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="hips" name="hips" class="form-input" placeholder="0.0" step="0.1">
+                                        <span class="input-unit">in</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="arms" class="form-label">Arms</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="arms" name="arms" class="form-input" placeholder="0.0" step="0.1">
+                                        <span class="input-unit">in</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="thighs" class="form-label">Thighs</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="thighs" name="thighs" class="form-input" placeholder="0.0" step="0.1">
+                                        <span class="input-unit">in</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="calves" class="form-label">Calves</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="calves" name="calves" class="form-input" placeholder="0.0" step="0.1">
+                                        <span class="input-unit">in</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Strength PR Section -->
+                        <div class="form-section" id="strength-section" style="display: none;">
+                            <h2 class="section-title">Strength Personal Records</h2>
+                            <div class="strength-grid">
+                                <div class="form-group">
+                                    <label for="exercise-name" class="form-label">Exercise</label>
+                                    <input type="text" id="exercise-name" name="exerciseName" class="form-input" placeholder="e.g., Bench Press">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pr-weight" class="form-label">Weight</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="pr-weight" name="prWeight" class="form-input" placeholder="0">
+                                        <span class="input-unit">lbs</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pr-reps" class="form-label">Reps</label>
+                                    <input type="number" id="pr-reps" name="prReps" class="form-input" placeholder="0">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pr-notes" class="form-label">PR Notes</label>
+                                    <textarea id="pr-notes" name="prNotes" class="form-textarea" placeholder="Any details about this personal record..." rows="2"></textarea>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-secondary" id="add-another-pr">
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                </svg>
+                                Add Another PR
+                            </button>
+                        </div>
+
+                        <!-- Performance Section -->
+                        <div class="form-section" id="performance-section" style="display: none;">
+                            <h2 class="section-title">Performance Metrics</h2>
+                            <div class="performance-grid">
+                                <div class="form-group">
+                                    <label for="activity-type" class="form-label">Activity Type</label>
+                                    <select id="activity-type" name="activityType" class="form-select">
+                                        <option value="">Select activity</option>
+                                        <option value="running">Running</option>
+                                        <option value="cycling">Cycling</option>
+                                        <option value="swimming">Swimming</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="distance" class="form-label">Distance</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="distance" name="distance" class="form-input" placeholder="0.0" step="0.1">
+                                        <span class="input-unit">miles</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="duration" class="form-label">Duration</label>
+                                    <input type="text" id="duration" name="duration" class="form-input" placeholder="HH:MM:SS">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pace" class="form-label">Pace</label>
+                                    <input type="text" id="pace" name="pace" class="form-input" placeholder="MM:SS per mile">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Photo Section -->
+                        <div class="form-section" id="photos-section" style="display: none;">
+                            <h2 class="section-title">Progress Photos</h2>
+                            <div class="photo-upload-area">
+                                <div class="upload-placeholder">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/>
+                                    </svg>
+                                    <p>Drag and drop photos here or click to upload</p>
+                                    <span class="upload-hint">Supports JPG, PNG - Max 5MB each</span>
+                                </div>
+                                <input type="file" id="progress-photos" name="progressPhotos" class="file-input" multiple accept="image/*" style="display: none;">
+                            </div>
+
+                            <div class="photo-angles">
+                                <h4>Photo Angles</h4>
+                                <div class="angle-tags">
+                                    <label class="angle-tag">
+                                        <input type="checkbox" name="photoAngles" value="front">
+                                        <span>Front</span>
+                                    </label>
+                                    <label class="angle-tag">
+                                        <input type="checkbox" name="photoAngles" value="side">
+                                        <span>Side</span>
+                                    </label>
+                                    <label class="angle-tag">
+                                        <input type="checkbox" name="photoAngles" value="back">
+                                        <span>Back</span>
+                                    </label>
+                                    <label class="angle-tag">
+                                        <input type="checkbox" name="photoAngles" value="flexed">
+                                        <span>Flexed</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <a href="progress.html" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Save Progress Log</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/log-entry.js"></script>
+</body>
+</html>

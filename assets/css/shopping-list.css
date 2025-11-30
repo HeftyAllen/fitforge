@@ -1,0 +1,546 @@
+/* assets/css/shopping-list.css - Modern Shopping List */
+/* Responsive, Interactive Design */
+
+.shopping-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, var(--primary-50), var(--secondary-50));
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    margin-bottom: var(--space-8);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+}
+
+.page-header h1 {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    background: linear-gradient(135deg, var(--primary-600), var(--secondary-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-2);
+}
+
+/* List Summary */
+.list-summary {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+    box-shadow: var(--shadow-sm);
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    text-align: center;
+}
+
+.stat {
+    padding: var(--space-4);
+    border-radius: var(--radius-xl);
+    background: var(--surface-secondary);
+    transition: all var(--transition-normal);
+}
+
+.stat:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-value {
+    display: block;
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: var(--primary-600);
+    margin-bottom: var(--space-1);
+}
+
+.stat-label {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    font-weight: var(--font-medium);
+}
+
+/* Shopping List Content */
+.shopping-list-content {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-2xl);
+    margin-bottom: var(--space-8);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.list-section {
+    border-bottom: 1px solid var(--border-primary);
+    transition: all var(--transition-normal);
+}
+
+.list-section:last-child {
+    border-bottom: none;
+}
+
+.list-section:hover {
+    background: var(--surface-secondary);
+}
+
+.section-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    padding: var(--space-6) var(--space-6) var(--space-4);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.section-title::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--primary-500), var(--secondary-500));
+    border-radius: var(--radius-full);
+}
+
+.list-items {
+    padding: 0 var(--space-6) var(--space-6);
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4);
+    background: var(--surface-primary);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-2);
+    border: 1px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.list-item:hover {
+    border-color: var(--primary-300);
+    transform: translateX(4px);
+}
+
+.list-item:last-child {
+    margin-bottom: 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    cursor: pointer;
+    flex: 1;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+    background: linear-gradient(135deg, var(--primary-500), var(--secondary-500));
+    border-color: transparent;
+    transform: scale(1.1);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    color: white;
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+}
+
+.item-name {
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    font-weight: var(--font-medium);
+    transition: all var(--transition-fast);
+}
+
+.checkbox-label input[type="checkbox"]:checked ~ .item-name {
+    color: var(--text-tertiary);
+    text-decoration: line-through;
+}
+
+.item-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.item-category {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    background: var(--surface-tertiary);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-full);
+    font-weight: var(--font-medium);
+}
+
+.btn-remove-item {
+    width: 32px;
+    height: 32px;
+    background: var(--error-50);
+    border: 1px solid var(--error-200);
+    border-radius: var(--radius-full);
+    color: var(--error-600);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+}
+
+.btn-remove-item:hover {
+    background: var(--error-500);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Add Item Form */
+.add-item-section {
+    background: var(--surface-secondary);
+    border-top: 1px solid var(--border-primary);
+    padding: var(--space-6);
+}
+
+.add-item-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: var(--space-3);
+    align-items: end;
+}
+
+.form-input {
+    padding: var(--space-3) var(--space-4);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    background: var(--surface-primary);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    transition: all var(--transition-fast);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+.form-select {
+    padding: var(--space-3) var(--space-4);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    background: var(--surface-primary);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    min-width: 120px;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+/* List Actions */
+.list-actions {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+    box-shadow: var(--shadow-sm);
+}
+
+.action-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Cost Estimate */
+.cost-estimate {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+}
+
+.cost-estimate h3 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+    text-align: center;
+}
+
+.cost-breakdown {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.cost-item:last-child {
+    border-bottom: none;
+}
+
+.cost-category {
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    font-weight: var(--font-medium);
+}
+
+.cost-amount {
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    font-weight: var(--font-semibold);
+}
+
+.cost-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) 0;
+    margin-top: var(--space-4);
+    border-top: 2px solid var(--primary-500);
+}
+
+.total-label {
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+    font-weight: var(--font-bold);
+}
+
+.total-amount {
+    font-size: var(--text-xl);
+    color: var(--primary-600);
+    font-weight: var(--font-bold);
+}
+
+/* API Integration Styles */
+.list-item.api-synced {
+    border-left: 4px solid var(--success-500);
+}
+
+.list-item.api-pending {
+    opacity: 0.7;
+    background: var(--surface-tertiary);
+}
+
+.category-produce .section-title::before { background: var(--success-500); }
+.category-protein .section-title::before { background: var(--primary-500); }
+.category-pantry .section-title::before { background: var(--secondary-500); }
+.category-dairy .section-title::before { background: var(--warning-500); }
+.category-frozen .section-title::before { background: var(--info-500); }
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+    .shopping-list-container {
+        padding: 0 var(--space-4);
+    }
+
+    .page-header {
+        padding: var(--space-6);
+        text-align: center;
+    }
+
+    .page-header h1 {
+        font-size: var(--text-3xl);
+    }
+
+    .summary-stats {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .list-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-3);
+    }
+
+    .item-meta {
+        align-self: flex-end;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .shopping-list-container {
+        padding: 0 var(--space-3);
+    }
+
+    .page-header {
+        padding: var(--space-4);
+    }
+
+    .page-header h1 {
+        font-size: var(--text-2xl);
+    }
+
+    .section-title {
+        padding: var(--space-4);
+        font-size: var(--text-lg);
+    }
+
+    .list-items {
+        padding: 0 var(--space-4) var(--space-4);
+    }
+
+    .list-item {
+        padding: var(--space-3);
+    }
+
+    .item-meta {
+        align-self: stretch;
+        justify-content: space-between;
+    }
+
+    .cost-breakdown {
+        max-width: 100%;
+    }
+}
+
+/* Small Mobile (360px and below) */
+@media (max-width: 360px) {
+    .checkbox-label {
+        gap: var(--space-2);
+    }
+
+    .item-name {
+        font-size: var(--text-sm);
+    }
+
+    .item-category {
+        font-size: 0.7rem;
+    }
+
+    .cost-item,
+    .cost-total {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-1);
+    }
+}
+
+/* Large Desktop (1440px and above) */
+@media (min-width: 1440px) {
+    .shopping-list-container {
+        max-width: 1200px;
+    }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+    .page-header {
+        background: linear-gradient(135deg, var(--primary-900), var(--secondary-900));
+    }
+
+    .stat {
+        background: var(--surface-tertiary);
+    }
+
+    .list-section:hover {
+        background: var(--surface-tertiary);
+    }
+
+    .add-item-section {
+        background: var(--surface-tertiary);
+    }
+}
+
+/* Animation for new items */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.list-item.new-item {
+    animation: slideInRight 0.4s ease-out;
+}
+
+/* Print styles */
+@media print {
+    .page-header,
+    .add-item-section,
+    .list-actions,
+    .cost-estimate,
+    .btn-remove-item {
+        display: none !important;
+    }
+
+    .shopping-list-content {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+
+    .list-item {
+        break-inside: avoid;
+    }
+}

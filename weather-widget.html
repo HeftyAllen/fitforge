@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Information - FitForge</title>
+    <meta name="description" content="Weather conditions and forecasts for your activities">
+    <link rel="stylesheet" href="assets/css/styles.css">
+      <link rel="stylesheet" href="assets/css/running-tracker.css">
+</head>
+<body class="dashboard-page">
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <a href="home.html" class="logo">
+                        <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                            <circle cx="16" cy="16" r="4"/>
+                        </svg>
+                        <span class="logo-text">FitForge</span>
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+        <a href="home.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            Dashboard
+        </a>
+        <a href="workouts.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+            </svg>
+            Workouts
+        </a>
+        <a href="nutrition.html" class="nav-link ">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+            Nutrition
+        </a>
+        <a href="running-tracker.html" class="nav-link active">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Running Tracker
+        </a>
+        <a href="progress.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+            </svg>
+            Progress
+        </a>
+        <a href="community.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+            </svg>
+            Community
+        </a>
+        <a href="chatbot.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+            </svg>
+            Chatbot
+        </a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn notification-btn" aria-label="Notifications" >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <span class="notification-badge" >3</span>
+        </button>
+        
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+        
+        <div class="user-menu">
+            <button class="user-btn" aria-label="User menu">
+                <img src="images/profile.png" alt="User avatar" class="user-avatar">
+                <span class="user-name">Alex Johnson</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="user-dropdown">
+                <a href="profile.html" class="dropdown-item active">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    Settings
+                </a>
+                                       <a href="sync-status.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 12a9 9 0 0114.7-6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M17 2v4h-4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21 12a9 9 0 01-14.7 6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7 22v-4h4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Sync
+</a>
+<a href="export.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3.5" y="13.5" width="17" height="6" rx="1.2"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 3.5v10"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 7.5L12 3.5l3.5 4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Export
+</a>
+                <div class="dropdown-divider"></div>
+                <a href="auth-login.html" class="dropdown-item text-danger">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign Out
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="weather-container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1>Weather Information</h1>
+                        <p>Current conditions and forecasts for your outdoor activities</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" id="refresh-weather">
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                            </svg>
+                            Refresh
+                        </button>
+                        <button class="btn btn-primary" id="add-location">
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                            </svg>
+                            Add Location
+                        </button>
+                    </div>
+                </div>
+
+                <div class="weather-layout">
+                    <!-- Current Weather Section -->
+                    <section class="current-weather-section">
+                        <div class="location-header">
+                            <div class="location-info">
+                                <h2>San Francisco, CA</h2>
+                                <div class="location-details">
+                                    <span class="location-time">Updated 5 min ago</span>
+                                    <span class="location-coords">37.7749° N, 122.4194° W</span>
+                                </div>
+                            </div>
+                            <div class="location-actions">
+                                <button class="btn btn-secondary btn-small">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
+                                    </svg>
+                                    Save
+                                </button>
+                                <button class="btn btn-secondary btn-small">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"/>
+                                    </svg>
+                                    Share
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="current-weather-card">
+                            <div class="weather-main">
+                                <div class="weather-icon large">
+                                    <svg width="80" height="80" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                        <path d="M5 7a1 1 0 000 2 5 5 0 015 5 1 1 0 102 0 7 7 0 00-7-7z"/>
+                                        <path d="M5 11a1 1 0 100 2 1 1 0 011 1 1 1 0 102 0 3 3 0 00-3-3z"/>
+                                    </svg>
+                                </div>
+                                <div class="weather-primary">
+                                    <div class="temperature">18°C</div>
+                                    <div class="weather-condition">Partly Cloudy</div>
+                                    <div class="feels-like">Feels like 16°C</div>
+                                </div>
+                            </div>
+
+                            <div class="weather-details">
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Humidity</span>
+                                        <span class="detail-value">65%</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Wind</span>
+                                        <span class="detail-value">12 km/h WSW</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Pressure</span>
+                                        <span class="detail-value">1014 hPa</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Visibility</span>
+                                        <span class="detail-value">16 km</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">UV Index</span>
+                                        <span class="detail-value">4 Moderate</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Sunrise</span>
+                                        <span class="detail-value">6:45 AM</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Sunset</span>
+                                        <span class="detail-value">5:12 PM</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Moon Phase</span>
+                                        <span class="detail-value">Waxing Crescent</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity Recommendations -->
+                        <div class="activity-recommendations">
+                            <h3>Activity Recommendations</h3>
+                            <div class="recommendation-cards">
+                                <div class="recommendation-card good">
+                                    <div class="recommendation-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="recommendation-content">
+                                        <h4>Running</h4>
+                                        <p>Perfect conditions for running! Mild temperature and light winds.</p>
+                                        <div class="recommendation-stats">
+                                            <span class="stat">Ideal temperature</span>
+                                            <span class="stat">Light breeze</span>
+                                            <span class="stat">Good visibility</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="recommendation-card good">
+                                    <div class="recommendation-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="recommendation-content">
+                                        <h4>Outdoor Workout</h4>
+                                        <p>Great weather for bodyweight exercises in the park.</p>
+                                        <div class="recommendation-stats">
+                                            <span class="stat">Comfortable temp</span>
+                                            <span class="stat">Dry conditions</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="recommendation-card moderate">
+                                    <div class="recommendation-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="recommendation-content">
+                                        <h4>Hiking</h4>
+                                        <p>Good conditions, but check for changing cloud cover.</p>
+                                        <div class="recommendation-stats">
+                                            <span class="stat">Watch for clouds</span>
+                                            <span class="stat">Bring layers</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Forecast Section -->
+                    <section class="forecast-section">
+                        <!-- Hourly Forecast -->
+                        <div class="hourly-forecast">
+                            <h3>24-Hour Forecast</h3>
+                            <div class="hourly-scroll">
+                                <div class="hourly-item">
+                                    <span class="hour-time">Now</span>
+                                    <div class="hour-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                            <path d="M5 7a1 1 0 000 2 5 5 0 015 5 1 1 0 102 0 7 7 0 00-7-7z"/>
+                                            <path d="M5 11a1 1 0 100 2 1 1 0 011 1 1 1 0 102 0 3 3 0 00-3-3z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="hour-temp">18°</span>
+                                </div>
+                                <div class="hourly-item">
+                                    <span class="hour-time">1 PM</span>
+                                    <div class="hour-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                            <path d="M5 7a1 1 0 000 2 5 5 0 015 5 1 1 0 102 0 7 7 0 00-7-7z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="hour-temp">19°</span>
+                                </div>
+                                <div class="hourly-item">
+                                    <span class="hour-time">2 PM</span>
+                                    <div class="hour-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                            <path d="M5 7a1 1 0 000 2 5 5 0 015 5 1 1 0 102 0 7 7 0 00-7-7z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="hour-temp">20°</span>
+                                </div>
+                                <div class="hourly-item">
+                                    <span class="hour-time">3 PM</span>
+                                    <div class="hour-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="hour-temp">21°</span>
+                                </div>
+                                <div class="hourly-item">
+                                    <span class="hour-time">4 PM</span>
+                                    <div class="hour-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="hour-temp">20°</span>
+                                </div>
+                                <div class="hourly-item">
+                                    <span class="hour-time">5 PM</span>
+                                    <div class="hour-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                            <path d="M5 7a1 1 0 000 2 5 5 0 015 5 1 1 0 102 0 7 7 0 00-7-7z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="hour-temp">19°</span>
+                                </div>
+                                <div class="hourly-item">
+                                    <span class="hour-time">6 PM</span>
+                                    <div class="hour-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                            <path d="M5 7a1 1 0 000 2 5 5 0 015 5 1 1 0 102 0 7 7 0 00-7-7z"/>
+                                            <path d="M5 11a1 1 0 100 2 1 1 0 011 1 1 1 0 102 0 3 3 0 00-3-3z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="hour-temp">17°</span>
+                                </div>
+                                <!-- Add more hourly items -->
+                            </div>
+                        </div>
+
+                        <!-- 7-Day Forecast -->
+                        <div class="weekly-forecast">
+                            <h3>7-Day Forecast</h3>
+                            <div class="weekly-list">
+                                <div class="day-forecast">
+                                    <span class="day-name">Today</span>
+                                    <div class="day-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                            <path d="M5 7a1 1 0 000 2 5 5 0 015 5 1 1 0 102 0 7 7 0 00-7-7z"/>
+                                            <path d="M5 11a1 1 0 100 2 1 1 0 011 1 1 1 0 102 0 3 3 0 00-3-3z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="day-temps">
+                                        <span class="high-temp">21°</span>
+                                        <span class="low-temp">12°</span>
+                                    </div>
+                                </div>
+                                <div class="day-forecast">
+                                    <span class="day-name">Tue</span>
+                                    <div class="day-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="day-temps">
+                                        <span class="high-temp">23°</span>
+                                        <span class="low-temp">13°</span>
+                                    </div>
+                                </div>
+                                <div class="day-forecast">
+                                    <span class="day-name">Wed</span>
+                                    <div class="day-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                            <path d="M5 7a1 1 0 000 2 5 5 0 015 5 1 1 0 102 0 7 7 0 00-7-7z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="day-temps">
+                                        <span class="high-temp">20°</span>
+                                        <span class="low-temp">12°</span>
+                                    </div>
+                                </div>
+                                <div class="day-forecast">
+                                    <span class="day-name">Thu</span>
+                                    <div class="day-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="day-temps">
+                                        <span class="high-temp">18°</span>
+                                        <span class="low-temp">11°</span>
+                                    </div>
+                                </div>
+                                <div class="day-forecast">
+                                    <span class="day-name">Fri</span>
+                                    <div class="day-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="day-temps">
+                                        <span class="high-temp">17°</span>
+                                        <span class="low-temp">10°</span>
+                                    </div>
+                                </div>
+                                <div class="day-forecast">
+                                    <span class="day-name">Sat</span>
+                                    <div class="day-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                            <path d="M5 7a1 1 0 000 2 5 5 0 015 5 1 1 0 102 0 7 7 0 00-7-7z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="day-temps">
+                                        <span class="high-temp">19°</span>
+                                        <span class="low-temp">11°</span>
+                                    </div>
+                                </div>
+                                <div class="day-forecast">
+                                    <span class="day-name">Sun</span>
+                                    <div class="day-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="day-temps">
+                                        <span class="high-temp">22°</span>
+                                        <span class="low-temp">13°</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Weather Maps & Additional Info -->
+                    <section class="weather-maps-section">
+                        <!-- Weather Map -->
+                        <div class="weather-map-card">
+                            <h3>Precipitation Map</h3>
+                            <div class="map-placeholder">
+                                <div class="map-overlay">
+                                    <div class="map-controls">
+                                        <button class="map-control active">Rain</button>
+                                        <button class="map-control">Clouds</button>
+                                        <button class="map-control">Temp</button>
+                                    </div>
+                                </div>
+                                <img src="assets/images/weather-map.jpg" alt="Weather map" class="weather-map-image">
+                            </div>
+                        </div>
+
+                        <!-- Air Quality -->
+                        <div class="air-quality-card">
+                            <h3>Air Quality</h3>
+                            <div class="air-quality-index">
+                                <div class="aqi-value good">42</div>
+                                <div class="aqi-label">Good</div>
+                            </div>
+                            <div class="air-quality-details">
+                                <div class="aq-detail">
+                                    <span class="aq-label">PM2.5</span>
+                                    <span class="aq-value">12 μg/m³</span>
+                                </div>
+                                <div class="aq-detail">
+                                    <span class="aq-label">PM10</span>
+                                    <span class="aq-value">18 μg/m³</span>
+                                </div>
+                                <div class="aq-detail">
+                                    <span class="aq-label">O₃</span>
+                                    <span class="aq-value">45 ppb</span>
+                                </div>
+                                <div class="aq-detail">
+                                    <span class="aq-label">NO₂</span>
+                                    <span class="aq-value">22 ppb</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Weather Alerts -->
+                        <div class="weather-alerts">
+                            <h3>Weather Alerts</h3>
+                            <div class="alerts-list">
+                                <div class="alert-item info">
+                                    <div class="alert-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="alert-content">
+                                        <h4>Coastal Fog Advisory</h4>
+                                        <p>Dense fog expected along the coast until 10 AM. Reduced visibility for morning activities.</p>
+                                        <span class="alert-time">Issued: 6:00 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Location Modal -->
+    <div class="modal add-location-modal" id="add-location-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Location</h2>
+                <button class="modal-close" id="close-location-modal">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="add-location-form" id="add-location-form">
+                    <div class="form-group">
+                        <label for="location-search" class="form-label">Search Location</label>
+                        <div class="search-container">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                            </svg>
+                            <input type="text" id="location-search" class="form-input" placeholder="Enter city name or zip code">
+                        </div>
+                    </div>
+
+                    <div class="suggested-locations">
+                        <h4>Suggested Locations</h4>
+                        <div class="locations-list">
+                            <button type="button" class="location-suggestion">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Use Current Location</span>
+                            </button>
+                            <button type="button" class="location-suggestion">
+                                <span>New York, NY</span>
+                            </button>
+                            <button type="button" class="location-suggestion">
+                                <span>Los Angeles, CA</span>
+                            </button>
+                            <button type="button" class="location-suggestion">
+                                <span>Chicago, IL</span>
+                            </button>
+                            <button type="button" class="location-suggestion">
+                                <span>Miami, FL</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-location">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Location</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script  type="module"  src="assets/js/modules/weather-widget.js"></script>
+</body>
+</html>

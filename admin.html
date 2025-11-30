@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Panel — FitX</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <div class="brand">
+    <a href="home.html" class="logo">GYM</a>
+    <div>
+      <div class="site-title">Admin Panel</div>
+      <div class="small">Manage users, content, and API keys</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <h3>User Management</h3>
+    <div>
+      <label>Search Users</label>
+      <input type="text" placeholder="Search by name or email">
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th><th>Email</th><th>Role</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe</td><td>john@example.com</td><td>Member</td>
+            <td><button class="btn">Edit</button> <button class="btn">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <h3>API & System</h3>
+    <button class="btn">Rotate API Keys</button>
+    <button class="btn">Clear Cache</button>
+    <button class="btn">Export Users</button>
+  </div>
+</main>
+</div>
+</body>
+</html>

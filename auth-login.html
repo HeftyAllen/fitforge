@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - FitForge</title>
+    <meta name="description" content="Sign in to your FitForge account">
+    <link rel="stylesheet" href="assets/css/styles.css">
+      <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/auth.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <!-- Background Visual -->
+        <div class="auth-background">
+            <div class="auth-graphic">
+                <svg width="400" height="400" viewBox="0 0 400 400" fill="currentColor">
+                    <path d="M200 50c-82.8 0-150 67.2-150 150s67.2 150 150 150 150-67.2 150-150S282.8 50 200 50zm0 30c66.3 0 120 53.7 120 120s-53.7 120-120 120S80 266.3 80 200 133.7 80 200 80z"/>
+                    <path d="M200 110c-49.7 0-90 40.3-90 90s40.3 90 90 90 90-40.3 90-90-40.3-90-90-90zm0 30c33.1 0 60 26.9 60 60s-26.9 60-60 60-60-26.9-60-60 26.9-60 60-60z"/>
+                    <path d="M200 140c-33.1 0-60 26.9-60 60s26.9 60 60 60 60-26.9 60-60-26.9-60-60-60zm0 30c16.5 0 30 13.5 30 30s-13.5 30-30 30-30-13.5-30-30 13.5-30 30-30z"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Auth Form -->
+        <div class="auth-form-container">
+            <div class="auth-header">
+                <a href="index.html" class="auth-logo">
+                    <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                        <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                        <circle cx="16" cy="16" r="4"/>
+                    </svg>
+                    <span class="logo-text">FitForge</span>
+                </a>
+                <h1>Welcome Back</h1>
+                <p>Sign in to continue your fitness journey</p>
+            </div>
+
+            <form class="auth-form" id="login-form">
+                <!-- Social Login -->
+                <div class="social-login">
+                    <button type="button" class="btn btn-social btn-google" onclick="socialLogin('google')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Continue with Google
+                    </button>
+                    <button type="button" class="btn btn-social btn-apple" onclick="socialLogin('apple')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                        Continue with Apple
+                    </button>
+                </div>
+
+                <div class="auth-divider">
+                    <span>or continue with email</span>
+                </div>
+
+                <!-- Email/Password Form -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                    <div class="form-error" id="email-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="password-input-container">
+                        <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle" id="password-toggle">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="form-error" id="password-error"></div>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember" name="remember">
+                        <span class="checkmark"></span>
+                        Remember me for 30 days
+                    </label>
+                    <a href="auth-forgot.html" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-auth">
+                    Sign In to Your Account
+                </button>
+
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="auth-signup.html" class="auth-link">Create account</a></p>
+                    <p class="auth-alt">
+                        Prefer no password? <a href="auth-magic-link.html" class="auth-link">Sign in with magic link</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="auth-theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>

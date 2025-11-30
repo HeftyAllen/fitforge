@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Tracker - FitForge</title>
+    <meta name="description" content="Track your runs, hikes, and outdoor activities with GPS">
+    <link rel="stylesheet" href="assets/css/styles.css">
+     <link rel="stylesheet" href="assets/css/running-tracker.css">
+    <!-- Leaflet CSS for maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body class="dashboard-page">
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <a href="home.html" class="logo">
+                        <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                            <circle cx="16" cy="16" r="4"/>
+                        </svg>
+                        <span class="logo-text">FitForge</span>
+                    </a>
+                </div>
+                <nav class="main-nav">
+        <a href="home.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            Dashboard
+        </a>
+        <a href="workouts.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+            </svg>
+            Workouts
+        </a>
+        <a href="nutrition.html" class="nav-link ">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+            Nutrition
+        </a>
+        <a href="running-tracker.html" class="nav-link active">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Running Tracker
+        </a>
+        <a href="progress.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+            </svg>
+            Progress
+        </a>
+        <a href="community.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+            </svg>
+            Community
+        </a>
+        <a href="chatbot.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+            </svg>
+            Chatbot
+        </a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn notification-btn" aria-label="Notifications" >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <span class="notification-badge" >3</span>
+        </button>
+        
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+        
+        <div class="user-menu">
+            <button class="user-btn" aria-label="User menu">
+                <img src="images/profile.png" alt="User avatar" class="user-avatar">
+                <span class="user-name">Alex Johnson</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="user-dropdown">
+                <a href="profile.html" class="dropdown-item active">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    Settings
+                </a>
+                                       <a href="sync-status.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 12a9 9 0 0114.7-6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M17 2v4h-4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21 12a9 9 0 01-14.7 6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7 22v-4h4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Sync
+</a>
+<a href="export.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3.5" y="13.5" width="17" height="6" rx="1.2"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 3.5v10"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 7.5L12 3.5l3.5 4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Export
+</a>
+                <div class="dropdown-divider"></div>
+                <a href="auth-login.html" class="dropdown-item text-danger">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign Out
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="running-tracker-container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1>Run Tracker</h1>
+                        <p>Track your runs, hikes, and outdoor activities with GPS</p>
+                    </div>
+                    <div class="header-actions">
+                        <a href="running-history.html" class="btn btn-secondary">
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                            </svg>
+                            Activity History
+                        </a>
+                    </div>
+                </div>
+
+                <div class="tracker-layout">
+                    <!-- Left Panel - Controls & Stats -->
+                    <div class="tracker-controls-panel">
+                        <!-- Activity Type Selection -->
+                        <div class="activity-type-selector">
+                            <h3>Activity Type</h3>
+                            <div class="activity-types">
+                                <button class="activity-type active" data-type="running">
+                                    <div class="activity-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <span>Running</span>
+                                </button>
+                                <button class="activity-type" data-type="walking">
+                                    <div class="activity-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <span>Walking</span>
+                                </button>
+                                <button class="activity-type" data-type="hiking">
+                                    <div class="activity-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <span>Hiking</span>
+                                </button>
+                                <button class="activity-type" data-type="cycling">
+                                    <div class="activity-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"/>
+                                        </svg>
+                                    </div>
+                                    <span>Cycling</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Goal Setting -->
+                        <div class="goal-setting">
+                            <h3>Set Goal</h3>
+                            <div class="goal-options">
+                                <button class="goal-option active" data-goal="distance">
+                                    <span>Distance</span>
+                                </button>
+                                <button class="goal-option" data-goal="time">
+                                    <span>Time</span>
+                                </button>
+                                <button class="goal-option" data-goal="calories">
+                                    <span>Calories</span>
+                                </button>
+                            </div>
+                            <div class="goal-input">
+                                <input type="number" class="form-input" placeholder="5.0" min="0.1" step="0.1">
+                                <span class="goal-unit">km</span>
+                            </div>
+                        </div>
+
+                        <!-- Current Weather -->
+                        <div class="weather-widget">
+                            <h3>Current Weather</h3>
+                            <div class="weather-info">
+                                <div class="weather-icon">
+                                    <svg width="32" height="32" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"/>
+                                        <path d="M5 7a1 1 0 000 2 5 5 0 015 5 1 1 0 102 0 7 7 0 00-7-7z"/>
+                                        <path d="M5 11a1 1 0 100 2 1 1 0 011 1 1 1 0 102 0 3 3 0 00-3-3z"/>
+                                    </svg>
+                                </div>
+                                <div class="weather-details">
+                                    <div class="weather-temp">18°C</div>
+                                    <div class="weather-condition">Partly Cloudy</div>
+                                    <div class="weather-location">San Francisco, CA</div>
+                                </div>
+                            </div>
+                            <div class="weather-stats">
+                                <div class="weather-stat">
+                                    <span class="stat-label">Humidity</span>
+                                    <span class="stat-value">65%</span>
+                                </div>
+                                <div class="weather-stat">
+                                    <span class="stat-label">Wind</span>
+                                    <span class="stat-value">12 km/h</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="quick-stats">
+                            <h3>Quick Stats</h3>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="stat-info">
+                                        <span class="stat-value">24.5</span>
+                                        <span class="stat-label">Total km</span>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="stat-info">
+                                        <span class="stat-value">8:24</span>
+                                        <span class="stat-label">Avg Pace</span>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="stat-info">
+                                        <span class="stat-value">1,240</span>
+                                        <span class="stat-label">Calories</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Tracker Area -->
+                    <div class="tracker-main-area">
+                        <!-- GPS Status -->
+                        <div class="gps-status">
+                            <div class="gps-indicator">
+                                <div class="gps-dot"></div>
+                                <span>GPS Signal: Strong</span>
+                            </div>
+                            <div class="battery-status">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3.5 4A1.5 1.5 0 002 5.5v9A1.5 1.5 0 003.5 16h11a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0014.5 4h-11zM4 5.5a.5.5 0 01.5-.5h11a.5.5 0 01.5.5v9a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-9zM6 7a1 1 0 000 2h6a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>85%</span>
+                            </div>
+                        </div>
+
+                        <!-- Map Container -->
+                        <div class="map-container" id="map-container">
+                            <div class="map-placeholder">
+                                <div class="map-loading">
+                                    <div class="loading-spinner"></div>
+                                    <p>Acquiring GPS signal...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Stats -->
+                        <div class="live-stats">
+                            <div class="stat-row">
+                                <div class="live-stat">
+                                    <span class="stat-value" id="current-time">00:00:00</span>
+                                    <span class="stat-label">Time</span>
+                                </div>
+                                <div class="live-stat">
+                                    <span class="stat-value" id="current-distance">0.00</span>
+                                    <span class="stat-label">Distance (km)</span>
+                                </div>
+                                <div class="live-stat">
+                                    <span class="stat-value" id="current-pace">--:--</span>
+                                    <span class="stat-label">Pace /km</span>
+                                </div>
+                                <div class="live-stat">
+                                    <span class="stat-value" id="current-calories">0</span>
+                                    <span class="stat-label">Calories</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Control Buttons -->
+                        <div class="tracker-controls">
+                            <button class="control-btn secondary" id="warmup-btn">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                </svg>
+                                Warm-up
+                            </button>
+                            <button class="control-btn primary" id="start-run-btn">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                                </svg>
+                                Start Run
+                            </button>
+                            <button class="control-btn secondary" id="route-planning-btn">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293z" clip-rule="evenodd"/>
+                                </svg>
+                                Plan Route
+                            </button>
+                        </div>
+
+                        <!-- Step Counter -->
+                        <div class="step-counter">
+                            <h3>Step Counter</h3>
+                            <div class="step-progress">
+                                <div class="step-info">
+                                    <span class="step-count">0</span>
+                                    <span class="step-goal">/ 10,000 steps</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Additional Features -->
+                    <div class="tracker-features-panel">
+                        <!-- Heart Rate Monitor -->
+                        <div class="heart-rate-monitor">
+                            <h3>Heart Rate</h3>
+                            <div class="heart-rate-display">
+                                <div class="heart-rate-value">--</div>
+                                <div class="heart-rate-unit">BPM</div>
+                            </div>
+                            <div class="heart-rate-graph">
+                                <div class="graph-placeholder">
+                                    <p>Connect heart rate monitor</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Audio Controls -->
+                        <div class="audio-controls">
+                            <h3>Audio</h3>
+                            <div class="audio-player">
+                                <div class="track-info">
+                                    <div class="track-title">Power Workout Mix</div>
+                                    <div class="track-artist">FitForge Radio</div>
+                                </div>
+                                <div class="audio-controls-buttons">
+                                    <button class="audio-btn">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z"/>
+                                        </svg>
+                                    </button>
+                                    <button class="audio-btn play-pause">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                    <button class="audio-btn">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Split Times -->
+                        <div class="split-times">
+                            <h3>Split Times</h3>
+                            <div class="splits-list">
+                                <div class="split-item">
+                                    <span class="split-number">1</span>
+                                    <span class="split-distance">1 km</span>
+                                    <span class="split-time">--:--</span>
+                                </div>
+                                <div class="split-item">
+                                    <span class="split-number">2</span>
+                                    <span class="split-distance">2 km</span>
+                                    <span class="split-time">--:--</span>
+                                </div>
+                                <div class="split-item">
+                                    <span class="split-number">3</span>
+                                    <span class="split-distance">3 km</span>
+                                    <span class="split-time">--:--</span>
+                                </div>
+                                <div class="split-item">
+                                    <span class="split-number">4</span>
+                                    <span class="split-distance">4 km</span>
+                                    <span class="split-time">--:--</span>
+                                </div>
+                                <div class="split-item">
+                                    <span class="split-number">5</span>
+                                    <span class="split-distance">5 km</span>
+                                    <span class="split-time">--:--</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Emergency Contact -->
+                        <div class="emergency-contact">
+                            <h3>Safety</h3>
+                            <div class="safety-info">
+                                <p>Share your live location with emergency contacts</p>
+                                <button class="btn btn-secondary btn-small">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+                                    </svg>
+                                    Share Location
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Countdown Modal -->
+    <div class="modal countdown-modal" id="countdown-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="countdown-display">
+                    <div class="countdown-number">3</div>
+                    <p>Get ready to run!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Location Permission Modal -->
+    <div class="modal location-modal" id="location-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Location Access Required</h2>
+            </div>
+            <div class="modal-body">
+                <div class="location-permission">
+                    <div class="location-icon">
+                        <svg width="64" height="64" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3>Enable Location Services</h3>
+                    <p>To track your run accurately, FitForge needs access to your location. This allows us to map your route and calculate distance, pace, and elevation.</p>
+                    <div class="location-features">
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>GPS route tracking</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Real-time pace calculation</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Elevation data</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="deny-location">Not Now</button>
+                <button class="btn btn-primary" id="allow-location">Allow Location Access</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Running Session Active Modal -->
+    <div class="modal active-session-modal" id="active-session-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Run in Progress</h2>
+                <button class="modal-close" id="close-session-modal">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="session-stats">
+                    <div class="session-stat">
+                        <span class="stat-value" id="session-time">00:00:00</span>
+                        <span class="stat-label">Duration</span>
+                    </div>
+                    <div class="session-stat">
+                        <span class="stat-value" id="session-distance">0.00 km</span>
+                        <span class="stat-label">Distance</span>
+                    </div>
+                    <div class="session-stat">
+                        <span class="stat-value" id="session-pace">--:--</span>
+                        <span class="stat-label">Pace</span>
+                    </div>
+                </div>
+                <div class="session-controls">
+                    <button class="control-btn pause-btn" id="pause-session">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        Pause
+                    </button>
+                    <button class="control-btn stop-btn" id="stop-session">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd"/>
+                        </svg>
+                        Stop
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS for maps -->
+     <script type="module" src="/src/bootstrap.js"></script>
+<!-- your existing plain scripts here; they can use window.GymAPI -->
+<script src="/assets/js/legacy-weather-widget.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script  type="module" src="assets/js/modules/running-tracker.js"></script>
+</body>
+</html>

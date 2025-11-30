@@ -1,0 +1,342 @@
+<!-- player.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Session - Full Body Strength - FitForge</title>
+    <meta name="description" content="Guided workout session with timer and exercise instructions">
+    <link rel="stylesheet" href="assets/css/styles.css">
+     <link rel="stylesheet" href="assets/css/player.css">
+</head>
+
+<body class="workout-player-page">
+    <div class="player-container">
+        <!-- Player Header -->
+        <header class="player-header">
+            <div class="header-content">
+                <a href="workout-detail.html" class="back-btn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+                <div class="workout-info">
+                    <h1>Full Body Strength</h1>
+                    <div class="workout-meta">
+                        <span class="workout-duration">45 min</span>
+                        <span class="workout-progress">Exercise 1 of 6</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" id="notes-btn" aria-label="Workout notes">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                        </svg>
+                        <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+                    </button>
+                    <button class="icon-btn" id="settings-btn" aria-label="Player settings">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Player Content -->
+        <main class="player-content">
+            <!-- Current Exercise Section -->
+            <section class="current-exercise">
+                <div class="exercise-media">
+                    <div class="exercise-video">
+                        <img src="assets/images/exercise-demo-1.jpg" alt="Barbell Bench Press demonstration" class="demo-video">
+                        <div class="video-controls">
+                            <button class="control-btn" id="play-pause-btn">
+                                <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                            <button class="control-btn" id="sound-btn">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-info">
+                        <div class="exercise-header">
+                            <h2>Barbell Bench Press</h2>
+                            <div class="exercise-prescription">
+                                <span class="set-counter">Set 1 of 3</span>
+                                <span class="rep-target">8-12 reps</span>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-description">
+                            <p>Lie on a flat bench with feet firmly on the ground. Grip the barbell slightly wider than shoulder-width. Lower the bar to your chest, then press back up to full arm extension.</p>
+                        </div>
+                        
+                        <div class="exercise-tips">
+                            <h4>Tips for Success</h4>
+                            <ul>
+                                <li>Keep your back flat against the bench</li>
+                                <li>Drive through your heels for stability</li>
+                                <li>Don't bounce the bar off your chest</li>
+                                <li>Exhale during the pressing motion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timer and Controls -->
+                <div class="exercise-controls">
+                    <div class="timer-section">
+                        <div class="timer-display">
+                            <div class="timer" id="main-timer">00:90</div>
+                            <div class="timer-label">Rest Time</div>
+                        </div>
+                        
+                        <div class="timer-controls">
+                            <button class="timer-btn" id="decrease-time">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                            <button class="timer-btn primary" id="start-pause-timer">
+                                <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                            <button class="timer-btn" id="increase-time">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Set Tracking -->
+                    <div class="set-tracking">
+                        <h3>Track Your Set</h3>
+                        <div class="set-inputs">
+                            <div class="input-group">
+                                <label for="weight-input">Weight</label>
+                                <input type="number" id="weight-input" class="set-input" placeholder="0" min="0" max="500">
+                                <span class="input-unit">lbs</span>
+                            </div>
+                            <div class="input-group">
+                                <label for="reps-input">Reps</label>
+                                <input type="number" id="reps-input" class="set-input" placeholder="0" min="0" max="50">
+                                <span class="input-unit">reps</span>
+                            </div>
+                        </div>
+                        
+                        <div class="set-actions">
+                            <button class="btn btn-secondary" id="skip-set-btn">
+                                Skip Set
+                            </button>
+                            <button class="btn btn-primary" id="log-set-btn">
+                                Log Set
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workout Progress -->
+            <section class="workout-progress">
+                <div class="progress-header">
+                    <h3>Workout Progress</h3>
+                    <div class="completion-stats">
+                        <span class="completion-percent">25% Complete</span>
+                        <span class="time-remaining">~34 min remaining</span>
+                    </div>
+                </div>
+                
+                <div class="exercise-list">
+                    <!-- Completed Exercise -->
+                    <div class="exercise-item completed">
+                        <div class="exercise-status">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="exercise-details">
+                            <h4>Warm-up</h4>
+                            <span class="exercise-meta">Dynamic Stretching</span>
+                        </div>
+                        <div class="exercise-duration">5:00</div>
+                    </div>
+
+                    <!-- Current Exercise -->
+                    <div class="exercise-item current">
+                        <div class="exercise-status">
+                            <div class="current-indicator"></div>
+                        </div>
+                        <div class="exercise-details">
+                            <h4>Barbell Bench Press</h4>
+                            <span class="exercise-meta">3 sets × 8-12 reps</span>
+                            <div class="set-progress">
+                                <div class="set-dots">
+                                    <span class="set-dot completed"></span>
+                                    <span class="set-dot current"></span>
+                                    <span class="set-dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exercise-duration">~8:00</div>
+                    </div>
+
+                    <!-- Upcoming Exercises -->
+                    <div class="exercise-item upcoming">
+                        <div class="exercise-status"></div>
+                        <div class="exercise-details">
+                            <h4>Barbell Squat</h4>
+                            <span class="exercise-meta">4 sets × 6-8 reps</span>
+                        </div>
+                        <div class="exercise-duration">~10:00</div>
+                    </div>
+
+                    <div class="exercise-item upcoming">
+                        <div class="exercise-status"></div>
+                        <div class="exercise-details">
+                            <h4>Bent Over Row</h4>
+                            <span class="exercise-meta">3 sets × 8-12 reps</span>
+                        </div>
+                        <div class="exercise-duration">~7:00</div>
+                    </div>
+
+                    <div class="exercise-item upcoming">
+                        <div class="exercise-status"></div>
+                        <div class="exercise-details">
+                            <h4>Overhead Press</h4>
+                            <span class="exercise-meta">3 sets × 8-12 reps</span>
+                        </div>
+                        <div class="exercise-duration">~6:00</div>
+                    </div>
+
+                    <div class="exercise-item upcoming">
+                        <div class="exercise-status"></div>
+                        <div class="exercise-details">
+                            <h4>Cool-down</h4>
+                            <span class="exercise-meta">Static Stretching</span>
+                        </div>
+                        <div class="exercise-duration">5:00</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Player Controls -->
+        <footer class="player-controls">
+            <div class="controls-content">
+                <button class="control-btn large" id="previous-exercise-btn" disabled>
+                    <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    Previous
+                </button>
+                
+                <button class="control-btn large primary" id="next-exercise-btn">
+                    Next Exercise
+                    <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </footer>
+
+        <!-- Quick Actions Overlay -->
+        <div class="quick-actions-overlay" id="quick-actions">
+            <button class="quick-action-btn" id="finish-workout-btn">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Finish Workout
+            </button>
+            <button class="quick-action-btn" id="pause-workout-btn">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                Pause Workout
+            </button>
+        </div>
+    </div>
+
+    <!-- Notes Modal -->
+    <div class="modal" id="notes-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Workout Notes</h2>
+                <button class="modal-close" id="close-notes-modal">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea class="notes-textarea" placeholder="Add notes about your workout performance, how you felt, or anything you want to remember..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-notes">Cancel</button>
+                <button class="btn btn-primary" id="save-notes">Save Notes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Finish Workout Modal -->
+    <div class="modal" id="finish-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Finish Workout</h2>
+                <button class="modal-close" id="close-finish-modal">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="workout-summary">
+                    <h3>Workout Summary</h3>
+                    <div class="summary-stats">
+                        <div class="summary-stat">
+                            <span class="stat-value">25%</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                        <div class="summary-stat">
+                            <span class="stat-value">11:30</span>
+                            <span class="stat-label">Time Spent</span>
+                        </div>
+                        <div class="summary-stat">
+                            <span class="stat-value">2</span>
+                            <span class="stat-label">Exercises</span>
+                        </div>
+                        <div class="summary-stat">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Sets Logged</span>
+                        </div>
+                    </div>
+                    <div class="completion-warning">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        <p>You haven't completed all exercises. Are you sure you want to finish early?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-finish">Continue Workout</button>
+                <button class="btn btn-primary" id="confirm-finish">Finish Anyway</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/workout-player.js"></script>
+</body>
+</html>

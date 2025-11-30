@@ -1,0 +1,470 @@
+<!-- exercise-detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbell Bench Press - Exercise Details - FitForge</title>
+    <meta name="description" content="Complete instructions, tips, and variations for Barbell Bench Press">
+    <link rel="stylesheet" href="assets/css/styles.css">
+           <link rel="stylesheet" href="assets/css/exercises.css">
+</head>
+<body class="dashboard-page">
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <a href="home.html" class="logo">
+                        <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                            <circle cx="16" cy="16" r="4"/>
+                        </svg>
+                        <span class="logo-text">FitForge</span>
+                    </a>
+                </div>
+                                   <nav class="main-nav">
+        <a href="home.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            Dashboard
+        </a>
+        <a href="workouts.html" class="nav-link active">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+            </svg>
+            Workouts
+        </a>
+        <a href="nutrition.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+            Nutrition
+        </a>
+        <a href="running-tracker.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Running Tracker
+        </a>
+        <a href="progress.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+            </svg>
+            Progress
+        </a>
+        <a href="community.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+            </svg>
+            Community
+        </a>
+        <a href="chatbot.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+            </svg>
+            Chatbot
+        </a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn notification-btn" aria-label="Notifications" >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <span class="notification-badge" >3</span>
+        </button>
+        
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+        
+        <div class="user-menu">
+            <button class="user-btn" aria-label="User menu">
+                <img src="assets/images/avatar-placeholder.jpg" alt="User avatar" class="user-avatar">
+                <span class="user-name">Alex Johnson</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="user-dropdown">
+                <a href="profile.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    Settings
+                </a>
+                                       <a href="sync-status.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 12a9 9 0 0114.7-6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M17 2v4h-4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21 12a9 9 0 01-14.7 6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7 22v-4h4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Sync
+</a>
+<a href="export.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3.5" y="13.5" width="17" height="6" rx="1.2"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 3.5v10"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 7.5L12 3.5l3.5 4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Export
+</a>
+                <div class="dropdown-divider"></div>
+                <a href="auth-login.html" class="dropdown-item text-danger">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign Out
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="exercise-detail-container">
+                <!-- Exercise Header -->
+                <div class="exercise-header">
+                    <div class="exercise-hero">
+                        <div class="exercise-media">
+                            <div class="main-video">
+                                <img src="assets/images/exercise-demo-large-1.jpg" alt="Barbell Bench Press demonstration" class="demo-video">
+                                <button class="play-btn">
+                                    <svg width="40" height="40" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="media-thumbnails">
+                                <button class="thumbnail active">
+                                    <img src="assets/images/exercise-angle-1.jpg" alt="Front view">
+                                </button>
+                                <button class="thumbnail">
+                                    <img src="assets/images/exercise-angle-2.jpg" alt="Side view">
+                                </button>
+                                <button class="thumbnail">
+                                    <img src="assets/images/exercise-angle-3.jpg" alt="Close-up">
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-info">
+                            <div class="exercise-meta">
+                                <span class="exercise-difficulty intermediate">Intermediate</span>
+                                <span class="exercise-type">Strength</span>
+                                <span class="exercise-rating">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                    4.8 (2.4k)
+                                </span>
+                            </div>
+                            
+                            <h1>Barbell Bench Press</h1>
+                            
+                            <div class="exercise-stats">
+                                <div class="stat">
+                                    <span class="stat-value">24.5k</span>
+                                    <span class="stat-label">Times Used</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">18.2k</span>
+                                    <span class="stat-label">Times Saved</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">85%</span>
+                                    <span class="stat-label">Success Rate</span>
+                                </div>
+                            </div>
+
+                            <div class="exercise-tags">
+                                <span class="tag chest">Chest</span>
+                                <span class="tag">Barbell</span>
+                                <span class="tag compound">Compound</span>
+                                <span class="tag">Upper Body</span>
+                            </div>
+
+                            <div class="exercise-actions">
+                                <button class="btn btn-primary" id="add-to-workout-btn">
+                                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Add to Workout
+                                </button>
+                                <button class="btn btn-secondary" id="save-exercise-btn">
+                                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Save Exercise
+                                </button>
+                                <button class="btn btn-secondary">
+                                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"/>
+                                    </svg>
+                                    Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise Content -->
+                <div class="exercise-content">
+                    <!-- Left Column - Instructions & Details -->
+                    <div class="exercise-main">
+                        <!-- Instructions -->
+                        <section class="exercise-section">
+                            <h2>Instructions</h2>
+                            <div class="instructions-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h3>Setup</h3>
+                                        <p>Lie flat on a bench with your feet firmly on the ground. Your eyes should be directly under the barbell. Grip the bar slightly wider than shoulder-width apart.</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h3>Unrack the Bar</h3>
+                                        <p>Lift the bar off the rack and hold it directly above your chest with arms fully extended. Keep your wrists straight and elbows tucked slightly.</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h3>Lower the Bar</h3>
+                                        <p>Slowly lower the bar to your mid-chest while keeping your elbows at about a 45-degree angle from your body. Maintain control throughout the movement.</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h3>Press Up</h3>
+                                        <p>Drive the bar back up to the starting position by pushing through your chest and triceps. Exhale during the upward motion and maintain a stable base.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Tips & Common Mistakes -->
+                        <section class="exercise-section">
+                            <h2>Tips & Common Mistakes</h2>
+                            <div class="tips-grid">
+                                <div class="tip-card positive">
+                                    <div class="tip-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="tip-content">
+                                        <h4>Do: Keep Shoulders Back</h4>
+                                        <p>Retract your shoulder blades throughout the movement to protect your shoulders and engage the chest muscles properly.</p>
+                                    </div>
+                                </div>
+                                <div class="tip-card negative">
+                                    <div class="tip-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="tip-content">
+                                        <h4>Don't: Bounce the Bar</h4>
+                                        <p>Avoid bouncing the bar off your chest as this can cause injury and reduces muscle engagement. Control the descent.</p>
+                                    </div>
+                                </div>
+                                <div class="tip-card positive">
+                                    <div class="tip-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="tip-content">
+                                        <h4>Do: Use a Spotter</h4>
+                                        <p>Always use a spotter when lifting heavy weights to ensure safety and proper form throughout your sets.</p>
+                                    </div>
+                                </div>
+                                <div class="tip-card negative">
+                                    <div class="tip-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="tip-content">
+                                        <h4>Don't: Flare Elbows</h4>
+                                        <p>Avoid letting your elbows flare out to the sides as this puts excessive stress on the shoulder joints.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Muscle Groups -->
+                        <section class="exercise-section">
+                            <h2>Muscle Groups Worked</h2>
+                            <div class="muscle-groups">
+                                <div class="muscle-group primary">
+                                    <h4>Primary Muscles</h4>
+                                    <div class="muscle-list">
+                                        <span class="muscle-item chest">Pectoralis Major</span>
+                                        <span class="muscle-item chest">Pectoralis Minor</span>
+                                    </div>
+                                </div>
+                                <div class="muscle-group secondary">
+                                    <h4>Secondary Muscles</h4>
+                                    <div class="muscle-list">
+                                        <span class="muscle-item shoulders">Anterior Deltoid</span>
+                                        <span class="muscle-item arms">Triceps Brachii</span>
+                                        <span class="muscle-item back">Serratus Anterior</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Right Column - Variations & Details -->
+                    <div class="exercise-sidebar">
+                        <!-- Equipment & Details -->
+                        <section class="sidebar-card">
+                            <h3>Exercise Details</h3>
+                            <div class="detail-list">
+                                <div class="detail-item">
+                                    <span class="detail-label">Equipment</span>
+                                    <span class="detail-value">Barbell, Bench</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Force</span>
+                                    <span class="detail-value">Push</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Mechanics</span>
+                                    <span class="detail-value">Compound</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Experience</span>
+                                    <span class="detail-value">Intermediate</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Best For</span>
+                                    <span class="detail-value">Strength, Hypertrophy</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Variations -->
+                        <section class="sidebar-card">
+                            <h3>Exercise Variations</h3>
+                            <div class="variations-list">
+                                <a href="#" class="variation-item">
+                                    <div class="variation-info">
+                                        <h4>Dumbbell Bench Press</h4>
+                                        <p>Similar movement with dumbbells for greater range of motion</p>
+                                    </div>
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="variation-item">
+                                    <div class="variation-info">
+                                        <h4>Incline Bench Press</h4>
+                                        <p>Targets upper chest with an inclined bench</p>
+                                    </div>
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="variation-item">
+                                    <div class="variation-info">
+                                        <h4>Close Grip Bench Press</h4>
+                                        <p>Emphasizes triceps with a narrower grip</p>
+                                    </div>
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </section>
+
+                        <!-- Recommended Workouts -->
+                        <section class="sidebar-card">
+                            <h3>Recommended Workouts</h3>
+                            <div class="workout-list">
+                                <a href="workout-detail.html" class="workout-item">
+                                    <div class="workout-info">
+                                        <h4>Full Body Strength</h4>
+                                        <p>45 min • 6 exercises</p>
+                                    </div>
+                                    <span class="workout-type">Strength</span>
+                                </a>
+                                <a href="workout-detail.html" class="workout-item">
+                                    <div class="workout-info">
+                                        <h4>Chest & Triceps</h4>
+                                        <p>50 min • 8 exercises</p>
+                                    </div>
+                                    <span class="workout-type">Hypertrophy</span>
+                                </a>
+                                <a href="workout-detail.html" class="workout-item">
+                                    <div class="workout-info">
+                                        <h4>Push Day</h4>
+                                        <p>60 min • 10 exercises</p>
+                                    </div>
+                                    <span class="workout-type">Advanced</span>
+                                </a>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal video-modal" id="video-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Barbell Bench Press - Full Tutorial</h2>
+                <button class="modal-close" id="close-video-modal">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="video-container">
+                    <img src="assets/images/exercise-video-placeholder.jpg" alt="Exercise video" class="video-placeholder">
+                    <!-- In a real implementation, this would be a video player -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/exercise-detail.js"></script>
+</body>
+</html>

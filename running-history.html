@@ -1,0 +1,695 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity History - FitForge</title>
+    <meta name="description" content="View your running and activity history">
+    <link rel="stylesheet" href="assets/css/styles.css">
+     <link rel="stylesheet" href="assets/css/running-tracker.css">
+    <!-- Leaflet CSS for maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body class="dashboard-page">
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <a href="home.html" class="logo">
+                        <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                            <circle cx="16" cy="16" r="4"/>
+                        </svg>
+                        <span class="logo-text">FitForge</span>
+                    </a>
+                </div>
+                
+              <nav class="main-nav">
+        <a href="home.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            Dashboard
+        </a>
+        <a href="workouts.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+            </svg>
+            Workouts
+        </a>
+        <a href="nutrition.html" class="nav-link ">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+            Nutrition
+        </a>
+        <a href="running-tracker.html" class="nav-link active">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Running Tracker
+        </a>
+        <a href="progress.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+            </svg>
+            Progress
+        </a>
+        <a href="community.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+            </svg>
+            Community
+        </a>
+        <a href="chatbot.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+            </svg>
+            Chatbot
+        </a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn notification-btn" aria-label="Notifications" >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <span class="notification-badge" >3</span>
+        </button>
+        
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+        
+        <div class="user-menu">
+            <button class="user-btn" aria-label="User menu">
+                <img src="images/profile.png" alt="User avatar" class="user-avatar">
+                <span class="user-name">Alex Johnson</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="user-dropdown">
+                <a href="profile.html" class="dropdown-item active">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="dropdown-item">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    Settings
+                </a>
+                                       <a href="sync-status.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 12a9 9 0 0114.7-6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M17 2v4h-4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21 12a9 9 0 01-14.7 6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7 22v-4h4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Sync
+</a>
+<a href="export.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3.5" y="13.5" width="17" height="6" rx="1.2"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 3.5v10"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 7.5L12 3.5l3.5 4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Export
+</a>
+                <div class="dropdown-divider"></div>
+                <a href="auth-login.html" class="dropdown-item text-danger">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign Out
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="running-history-container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1>Activity History</h1>
+                        <p>View your running, hiking, and outdoor activity history</p>
+                    </div>
+                    <div class="header-actions">
+                        <a href="running-tracker.html" class="btn btn-primary">
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                            </svg>
+                            Start New Activity
+                        </a>
+                    </div>
+                </div>
+
+                <div class="history-layout">
+                    <!-- Left Sidebar - Filters & Stats -->
+                    <aside class="history-sidebar">
+                        <!-- Quick Stats -->
+                        <div class="sidebar-card quick-stats-card">
+                            <h3>Lifetime Stats</h3>
+                            <div class="lifetime-stats">
+                                <div class="lifetime-stat">
+                                    <span class="stat-value">248.5</span>
+                                    <span class="stat-label">Total km</span>
+                                </div>
+                                <div class="lifetime-stat">
+                                    <span class="stat-value">84</span>
+                                    <span class="stat-label">Activities</span>
+                                </div>
+                                <div class="lifetime-stat">
+                                    <span class="stat-value">35:42:18</span>
+                                    <span class="stat-label">Total Time</span>
+                                </div>
+                                <div class="lifetime-stat">
+                                    <span class="stat-value">18,240</span>
+                                    <span class="stat-label">Calories</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="sidebar-card filters-card">
+                            <h3>Filters</h3>
+                            
+                            <!-- Activity Type Filter -->
+                            <div class="filter-section">
+                                <h4>Activity Type</h4>
+                                <div class="filter-options">
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="activity-type" value="running" checked>
+                                        <span class="checkmark"></span>
+                                        Running
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="activity-type" value="walking" checked>
+                                        <span class="checkmark"></span>
+                                        Walking
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="activity-type" value="hiking">
+                                        <span class="checkmark"></span>
+                                        Hiking
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="activity-type" value="cycling">
+                                        <span class="checkmark"></span>
+                                        Cycling
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Date Range Filter -->
+                            <div class="filter-section">
+                                <h4>Date Range</h4>
+                                <div class="date-options">
+                                    <button class="date-option active" data-range="all">All Time</button>
+                                    <button class="date-option" data-range="week">This Week</button>
+                                    <button class="date-option" data-range="month">This Month</button>
+                                    <button class="date-option" data-range="year">This Year</button>
+                                </div>
+                                <div class="custom-date">
+                                    <label>Custom Range</label>
+                                    <div class="date-inputs">
+                                        <input type="date" class="form-input" placeholder="Start date">
+                                        <input type="date" class="form-input" placeholder="End date">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Distance Filter -->
+                            <div class="filter-section">
+                                <h4>Distance</h4>
+                                <div class="distance-options">
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="distance" value="short">
+                                        <span class="checkmark"></span>
+                                        Short (< 5km)
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="distance" value="medium" checked>
+                                        <span class="checkmark"></span>
+                                        Medium (5-10km)
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="distance" value="long">
+                                        <span class="checkmark"></span>
+                                        Long (> 10km)
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Sort Options -->
+                            <div class="filter-section">
+                                <h4>Sort By</h4>
+                                <select class="form-select">
+                                    <option value="date-desc">Date (Newest First)</option>
+                                    <option value="date-asc">Date (Oldest First)</option>
+                                    <option value="distance-desc">Distance (Longest First)</option>
+                                    <option value="distance-asc">Distance (Shortest First)</option>
+                                    <option value="duration-desc">Duration (Longest First)</option>
+                                    <option value="pace-desc">Pace (Fastest First)</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-actions">
+                                <button class="btn btn-secondary btn-full" id="reset-filters">Reset Filters</button>
+                                <button class="btn btn-primary btn-full" id="apply-filters">Apply Filters</button>
+                            </div>
+                        </div>
+
+                        <!-- Personal Bests -->
+                        <div class="sidebar-card personal-bests">
+                            <h3>Personal Bests</h3>
+                            <div class="pb-list">
+                                <div class="pb-item">
+                                    <div class="pb-distance">1 km</div>
+                                    <div class="pb-time">4:28</div>
+                                    <div class="pb-date">Nov 12, 2024</div>
+                                </div>
+                                <div class="pb-item">
+                                    <div class="pb-distance">5 km</div>
+                                    <div class="pb-time">24:15</div>
+                                    <div class="pb-date">Oct 28, 2024</div>
+                                </div>
+                                <div class="pb-item">
+                                    <div class="pb-distance">10 km</div>
+                                    <div class="pb-time">48:32</div>
+                                    <div class="pb-date">Nov 15, 2024</div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Main Content Area -->
+                    <div class="history-main">
+                        <!-- Statistics Overview -->
+                        <div class="stats-overview">
+                            <div class="stat-card large">
+                                <div class="stat-icon">
+                                    <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value">42.8 km</span>
+                                    <span class="stat-label">This Month</span>
+                                    <span class="stat-change positive">+12% from last month</span>
+                                </div>
+                            </div>
+                            <div class="stat-card large">
+                                <div class="stat-icon">
+                                    <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value">8:24</span>
+                                    <span class="stat-label">Average Pace</span>
+                                    <span class="stat-change positive">-0:23 from last month</span>
+                                </div>
+                            </div>
+                            <div class="stat-card large">
+                                <div class="stat-icon">
+                                    <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value">12</span>
+                                    <span class="stat-label">Activities This Month</span>
+                                    <span class="stat-change positive">+3 from last month</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity List -->
+                        <div class="activities-section">
+                            <div class="section-header">
+                                <h2>Recent Activities</h2>
+                                <div class="view-options">
+                                    <button class="view-option active" data-view="list">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                    <button class="view-option" data-view="grid">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="activities-list" id="activities-list">
+                                <!-- Activity 1 -->
+                                <div class="activity-card">
+                                    <div class="activity-header">
+                                        <div class="activity-type running">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span>Running</span>
+                                        </div>
+                                        <div class="activity-date">
+                                            <span>Today • 8:30 AM</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="activity-content">
+                                        <div class="activity-stats">
+                                            <div class="activity-stat">
+                                                <span class="stat-value">6.21 km</span>
+                                                <span class="stat-label">Distance</span>
+                                            </div>
+                                            <div class="activity-stat">
+                                                <span class="stat-value">48:32</span>
+                                                <span class="stat-label">Duration</span>
+                                            </div>
+                                            <div class="activity-stat">
+                                                <span class="stat-value">7:48</span>
+                                                <span class="stat-label">Avg Pace</span>
+                                            </div>
+                                            <div class="activity-stat">
+                                                <span class="stat-value">624</span>
+                                                <span class="stat-label">Calories</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="activity-map-preview">
+                                            <div class="map-mini">
+                                                <img src="assets/images/route-preview-1.jpg" alt="Route map">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-actions">
+                                        <button class="btn btn-secondary btn-small">View Details</button>
+                                        <button class="btn btn-secondary btn-small">Share</button>
+                                        <button class="btn btn-secondary btn-small">
+                                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Activity 2 -->
+                                <div class="activity-card">
+                                    <div class="activity-header">
+                                        <div class="activity-type running">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span>Running</span>
+                                        </div>
+                                        <div class="activity-date">
+                                            <span>Yesterday • 7:15 AM</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="activity-content">
+                                        <div class="activity-stats">
+                                            <div class="activity-stat">
+                                                <span class="stat-value">5.02 km</span>
+                                                <span class="stat-label">Distance</span>
+                                            </div>
+                                            <div class="activity-stat">
+                                                <span class="stat-value">42:18</span>
+                                                <span class="stat-label">Duration</span>
+                                            </div>
+                                            <div class="activity-stat">
+                                                <span class="stat-value">8:24</span>
+                                                <span class="stat-label">Avg Pace</span>
+                                            </div>
+                                            <div class="activity-stat">
+                                                <span class="stat-value">512</span>
+                                                <span class="stat-label">Calories</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="activity-achievement">
+                                            <div class="achievement-badge">
+                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                                </svg>
+                                                <span>Personal Best 5K!</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-actions">
+                                        <button class="btn btn-secondary btn-small">View Details</button>
+                                        <button class="btn btn-secondary btn-small">Share</button>
+                                        <button class="btn btn-secondary btn-small">
+                                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Activity 3 -->
+                                <div class="activity-card">
+                                    <div class="activity-header">
+                                        <div class="activity-type hiking">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span>Hiking</span>
+                                        </div>
+                                        <div class="activity-date">
+                                            <span>Nov 13, 2024 • 10:00 AM</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="activity-content">
+                                        <div class="activity-stats">
+                                            <div class="activity-stat">
+                                                <span class="stat-value">8.45 km</span>
+                                                <span class="stat-label">Distance</span>
+                                            </div>
+                                            <div class="activity-stat">
+                                                <span class="stat-value">2:15:42</span>
+                                                <span class="stat-label">Duration</span>
+                                            </div>
+                                            <div class="activity-stat">
+                                                <span class="stat-value">16:02</span>
+                                                <span class="stat-label">Avg Pace</span>
+                                            </div>
+                                            <div class="activity-stat">
+                                                <span class="stat-value">845</span>
+                                                <span class="stat-label">Calories</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="activity-elevation">
+                                            <div class="elevation-info">
+                                                <span class="elevation-gain">+324m</span>
+                                                <span class="elevation-label">Elevation Gain</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-actions">
+                                        <button class="btn btn-secondary btn-small">View Details</button>
+                                        <button class="btn btn-secondary btn-small">Share</button>
+                                        <button class="btn btn-secondary btn-small">
+                                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Add more activity cards as needed -->
+                            </div>
+
+                            <!-- Load More -->
+                            <div class="load-more-activities">
+                                <button class="btn btn-secondary">Load More Activities</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar - Charts & Insights -->
+                    <aside class="history-sidebar right-sidebar">
+                        <!-- Weekly Distance Chart -->
+                        <div class="sidebar-card weekly-chart">
+                            <h3>Weekly Distance</h3>
+                            <div class="chart-container">
+                                <div class="chart-bars">
+                                    <div class="chart-bar" style="height: 40%">
+                                        <span class="bar-value">2.1km</span>
+                                        <span class="bar-label">Mon</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 60%">
+                                        <span class="bar-value">3.2km</span>
+                                        <span class="bar-label">Tue</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 30%">
+                                        <span class="bar-value">1.5km</span>
+                                        <span class="bar-label">Wed</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 80%">
+                                        <span class="bar-value">4.5km</span>
+                                        <span class="bar-label">Thu</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 70%">
+                                        <span class="bar-value">3.8km</span>
+                                        <span class="bar-label">Fri</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 100%">
+                                        <span class="bar-value">6.2km</span>
+                                        <span class="bar-label">Sat</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 90%">
+                                        <span class="bar-value">5.6km</span>
+                                        <span class="bar-label">Sun</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pace Trends -->
+                        <div class="sidebar-card pace-trends">
+                            <h3>Pace Trends</h3>
+                            <div class="trend-info">
+                                <div class="trend-item improving">
+                                    <span class="trend-label">5K Pace</span>
+                                    <span class="trend-value">8:24 /km</span>
+                                    <span class="trend-change">-0:23</span>
+                                </div>
+                                <div class="trend-item stable">
+                                    <span class="trend-label">10K Pace</span>
+                                    <span class="trend-value">8:45 /km</span>
+                                    <span class="trend-change">+0:05</span>
+                                </div>
+                                <div class="trend-item improving">
+                                    <span class="trend-label">Recovery Pace</span>
+                                    <span class="trend-value">9:30 /km</span>
+                                    <span class="trend-change">-0:15</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Training Load -->
+                        <div class="sidebar-card training-load">
+                            <h3>Training Load</h3>
+                            <div class="load-info">
+                                <div class="load-meter">
+                                    <div class="meter-fill" style="width: 65%"></div>
+                                </div>
+                                <div class="load-stats">
+                                    <div class="load-stat">
+                                        <span class="stat-label">This Week</span>
+                                        <span class="stat-value">42.8 km</span>
+                                    </div>
+                                    <div class="load-stat">
+                                        <span class="stat-label">Optimal Range</span>
+                                        <span class="stat-value">35-50 km</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="recovery-suggestion">
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Good training load. Consider a recovery run tomorrow.</span>
+                            </div>
+                        </div>
+
+                        <!-- Achievements -->
+                        <div class="sidebar-card achievements">
+                            <h3>Recent Achievements</h3>
+                            <div class="achievements-list">
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="achievement-info">
+                                        <span class="achievement-title">5K Personal Best</span>
+                                        <span class="achievement-date">Nov 15, 2024</span>
+                                    </div>
+                                </div>
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="achievement-info">
+                                        <span class="achievement-title">50km Monthly Goal</span>
+                                        <span class="achievement-date">Nov 14, 2024</span>
+                                    </div>
+                                </div>
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">
+                                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="achievement-info">
+                                        <span class="achievement-title">10 Consecutive Days</span>
+                                        <span class="achievement-date">Nov 10, 2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Activity Detail Modal -->
+    <div class="modal activity-detail-modal" id="activity-detail-modal" style="display: none;">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Activity Details</h2>
+                <button class="modal-close" id="close-activity-modal">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Activity details would be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS for maps -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script type="module" src="assets/js/modules/running-history.js"></script>
+</body>

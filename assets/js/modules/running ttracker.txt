@@ -1,0 +1,1090 @@
+// assets/js/modules/running-tracker.js
+// Updated RunningTracker — dynamic quick stats, no hard-coded weather key,
+// improved split logic, robust DOM checks, consistent km units, localStorage save.
+
+class RunningTracker {
+  constructor() {
+    // session state
+    this.isRunning = false;
+    this.isPaused = false;
+    this.startTime = null;
+    this.pauseTime = null;
+    this.totalPausedTime = 0;
+
+    // metrics (kilometres)
+    this.currentDistance = 0; // in km
+    this.currentSteps = 0;
+    this.caloriesBurned = 0;
+
+    // geo / map
+    this.positions = []; // {lat, lng, timestamp, accuracy}
+    this.map = null;
+    this.routeLayer = null;
+    this.markerLayer = null;
+    this.watchId = null;
+
+    // extras
+    this.heartRate = 72;
+    this.heartRateInterval = null;
+    this.stepCounterInterval = null;
+    this.updateInterval = null;
+    this.audioPlaying = false;
+    this.currentActivityType = 'running';
+    this.currentGoal = { type: 'distance', value: 5.0 };
+    this.splits = [];
+    this.lastSplitDistance = 0; // km
+    this.plannedRouteLayer = null;
+    this.plannedWaypoints = [];
+
+    // initialize
+    this.init();
+  }
+
+  init() {
+    // DOM ready wiring that doesn't assume elements exist yet
+    this.initializeMap();
+    this.setupEventListeners();
+    this.initializeWeather();
+    this.initializeStepCounter();
+    this.initializeHeartRate();
+    this.checkGPSStatus();
+    this.loadUserPreferences();
+    this.loadHistoricalStats(); // compute quick stats from saved sessions
+  }
+
+  /* ---------- Persistence & historical stats ---------- */
+
+  loadUserPreferences() {
+    const savedActivity = localStorage.getItem('lastActivityType');
+    const savedGoal = localStorage.getItem('lastGoal');
+
+    if (savedActivity) {
+      const el = document.querySelector(`[data-type="${savedActivity}"]`);
+      if (el) this.selectActivityType(el);
+      else this.currentActivityType = savedActivity;
+    }
+
+    if (savedGoal) {
+      try {
+        const goalData = JSON.parse(savedGoal);
+        this.currentGoal = goalData || this.currentGoal;
+        this.updateGoalDisplay();
+      } catch (e) { /* ignore parse errors */ }
+    }
+  }
+
+  loadHistoricalStats() {
+    // Read saved sessions and compute quick stats
+    const sessions = JSON.parse(localStorage.getItem('runningSessions') || '[]');
+
+    const totals = { totalKm: 0, totalCalories: 0, totalSeconds: 0, weightedSecondsPerKm: 0 };
+
+    if (!sessions.length) {
+      this.updateQuickStatsDisplay({ totalKm: 0, avgPace: '--:--', calories: 0 });
+      return;
+    }
+
+    sessions.forEach(s => {
+      const km = Number(s.distance) || 0;
+      const seconds = Number(s.duration) || 0; // duration stored in seconds
+      totals.totalKm += km;
+      totals.totalCalories += Number(s.calories) || 0;
+      totals.totalSeconds += seconds;
+      // accumulate weighted seconds per km for average pace calc safely
+      if (km > 0) {
+        totals.weightedSecondsPerKm += (seconds); // will divide by total km later
+      }
+    });
+
+    const avgPace = (totals.totalKm > 0)
+      ? this.formatPace(Math.round(totals.totalSeconds / totals.totalKm))
+      : '--:--';
+
+    this.updateQuickStatsDisplay({
+      totalKm: totals.totalKm,
+      avgPace,
+      calories: totals.totalCalories
+    });
+  }
+
+  saveSessionToLocal(sessionData) {
+    const sessions = JSON.parse(localStorage.getItem('runningSessions') || '[]');
+    sessions.push(sessionData);
+    localStorage.setItem('runningSessions', JSON.stringify(sessions));
+    // after save update quick stats
+    this.loadHistoricalStats();
+  }
+
+  /* ---------- Map & location ---------- */
+
+  initializeMap() {
+    if (!document.getElementById('map-container')) return;
+
+    try {
+      this.map = L.map('map-container').setView([0, 0], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 18
+      }).addTo(this.map);
+
+      this.routeLayer = L.layerGroup().addTo(this.map);
+      this.markerLayer = L.layerGroup().addTo(this.map);
+      this.showMapLoading(true);
+      // attempt to center on user
+      this.getCurrentLocation().catch(() => {
+        // fallback location (San Francisco)
+        if (this.map) this.map.setView([37.7749, -122.4194], 10);
+        this.showMapLoading(false);
+      });
+    } catch (err) {
+      console.warn('Leaflet init failed', err);
+    }
+  }
+
+  getCurrentLocation() {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(new Error('Geolocation not supported'));
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const accuracy = position.coords.accuracy;
+
+          if (this.map) this.map.setView([lat, lng], 15);
+          this.showMapLoading(false);
+
+          // Add one marker for current location (do not duplicate)
+          L.marker([lat, lng]).addTo(this.markerLayer).bindPopup('Your current location');
+
+          // push to positions but avoid duplicates if last equals this
+          const last = this.positions.length ? this.positions[this.positions.length - 1] : null;
+          if (!last || last.lat !== lat || last.lng !== lng) {
+            this.positions.push({ lat, lng, timestamp: Date.now(), accuracy });
+          }
+
+          resolve({ lat, lng, accuracy });
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+          this.showMapLoading(false);
+          this.showLocationModal();
+          reject(error);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
+        }
+      );
+    });
+  }
+
+  startGPSWatch() {
+    if (!navigator.geolocation || this.watchId) return;
+    this.watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+
+        this.updateGPSIndicator(accuracy);
+
+        if (this.isRunning && !this.isPaused) {
+          // add new position; avoid exact duplicates
+          const last = this.positions.length ? this.positions[this.positions.length - 1] : null;
+          if (!last || last.lat !== lat || last.lng !== lng) {
+            this.positions.push({ lat, lng, timestamp: Date.now(), accuracy });
+            this.updateRoute();
+            this.calculateDistance();
+            this.checkSplit();
+          }
+        }
+
+        // always keep map centered during active session
+        if (this.map && this.isRunning) {
+          try { this.map.setView([lat, lng], this.map.getZoom()); } catch (e) { /* ignore */ }
+        }
+      },
+      (error) => {
+        console.warn('GPS watch error:', error);
+        this.updateGPSIndicator(null);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      }
+    );
+  }
+
+  stopGPSWatch() {
+    if (this.watchId && navigator.geolocation) {
+      navigator.geolocation.clearWatch(this.watchId);
+      this.watchId = null;
+    }
+  }
+
+  updateGPSIndicator(accuracy) {
+    const gpsDot = document.querySelector('.gps-dot');
+    const gpsText = document.querySelector('.gps-indicator span');
+    if (!gpsDot || !gpsText) return;
+
+    if (!accuracy && accuracy !== 0) {
+      gpsDot.style.background = '#ef4444';
+      gpsText.textContent = 'GPS Signal: Weak';
+      return;
+    }
+
+    if (accuracy < 10) {
+      gpsDot.style.background = '#22c55e';
+      gpsText.textContent = 'GPS Signal: Strong';
+    } else if (accuracy < 25) {
+      gpsDot.style.background = '#f59e0b';
+      gpsText.textContent = 'GPS Signal: Moderate';
+    } else {
+      gpsDot.style.background = '#ef4444';
+      gpsText.textContent = 'GPS Signal: Weak';
+    }
+  }
+
+  updateRoute() {
+    if (!this.routeLayer || !this.map) return;
+    this.routeLayer.clearLayers();
+    this.markerLayer.clearLayers();
+
+    if (this.positions.length === 0) return;
+
+    // draw polyline if more than 1 point
+    if (this.positions.length > 1) {
+      const latlngs = this.positions.map(p => [p.lat, p.lng]);
+      L.polyline(latlngs, { color: '#0ea5e9', weight: 4, opacity: 0.8 }).addTo(this.routeLayer);
+    }
+
+    // start marker
+    const start = this.positions[0];
+    L.marker([start.lat, start.lng]).addTo(this.markerLayer).bindPopup('Start');
+
+    // current marker
+    const last = this.positions[this.positions.length - 1];
+    L.marker([last.lat, last.lng]).addTo(this.markerLayer).bindPopup('Current Position');
+
+    try {
+      if (this.positions.length > 1) {
+        const bounds = L.latLngBounds(this.positions.map(p => [p.lat, p.lng]));
+        this.map.fitBounds(bounds, { maxZoom: 17, padding: [40, 40] });
+      } else {
+        this.map.setView([start.lat, start.lng], 15);
+      }
+    } catch (e) { /* ignore fitBounds errors */ }
+  }
+
+  /* ---------- Distance / splits / stats ---------- */
+
+  calculateDistance() {
+    if (this.positions.length < 2) {
+      this.currentDistance = 0;
+      this.updateLiveStats();
+      return;
+    }
+
+    let total = 0; // km
+    for (let i = 1; i < this.positions.length; i++) {
+      const prev = this.positions[i - 1];
+      const curr = this.positions[i];
+      total += this.calculateDistanceBetween(prev.lat, prev.lng, curr.lat, curr.lng);
+    }
+
+    this.currentDistance = total;
+    this.updateCalorieCalculation();
+    this.updateLiveStats();
+  }
+
+  // returns km
+  calculateDistanceBetween(lat1, lon1, lat2, lon2) {
+    const R = 6371; // km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  }
+
+  checkSplit() {
+    const splitDistance = 1; // 1 km splits
+    if (this.currentDistance - this.lastSplitDistance >= splitDistance) {
+      const splitTime = this.getCurrentTime();
+      const splitPace = this.calculateCurrentPace();
+      const splitKm = Math.floor(this.currentDistance) - Math.floor(this.lastSplitDistance);
+
+      // Use precise current distance for record
+      this.splits.push({
+        distance: Number(this.currentDistance.toFixed(2)),
+        time: splitTime,
+        pace: splitPace
+      });
+
+      // set lastSplitDistance to the currentDistance (so next split triggers correctly)
+      this.lastSplitDistance = this.currentDistance;
+      this.updateSplitsDisplay();
+    }
+  }
+
+  updateSplitsDisplay() {
+    const splitsList = document.querySelector('.splits-list');
+    if (!splitsList) return;
+    splitsList.innerHTML = '';
+
+    // render actual splits
+    this.splits.forEach((split, index) => {
+      const splitItem = document.createElement('div');
+      splitItem.className = 'split-item';
+      splitItem.innerHTML = `
+        <span class="split-number">${index + 1}</span>
+        <span class="split-distance">${split.distance} km</span>
+        <span class="split-time">${split.time}</span>
+      `;
+      splitsList.appendChild(splitItem);
+    });
+
+    // fill remaining placeholders up to 5
+    for (let i = this.splits.length; i < 5; i++) {
+      const splitItem = document.createElement('div');
+      splitItem.className = 'split-item';
+      splitItem.innerHTML = `
+        <span class="split-number">${i + 1}</span>
+        <span class="split-distance">${i + 1} km</span>
+        <span class="split-time">--:--</span>
+      `;
+      splitsList.appendChild(splitItem);
+    }
+  }
+
+  /* ---------- UI wiring ---------- */
+
+  setupEventListeners() {
+    // Activity type selection
+    document.querySelectorAll('.activity-type').forEach(button => {
+      button.addEventListener('click', (e) => {
+        this.selectActivityType(e.currentTarget);
+      });
+    });
+
+    // Goal options
+    document.querySelectorAll('.goal-option').forEach(button => {
+      button.addEventListener('click', (e) => {
+        this.selectGoalType(e.currentTarget);
+      });
+    });
+
+    // Goal input - be defensive
+    const goalInput = document.querySelector('.goal-input input');
+    if (goalInput) {
+      goalInput.addEventListener('input', (e) => {
+        this.currentGoal.value = parseFloat(e.target.value) || 0;
+        localStorage.setItem('lastGoal', JSON.stringify(this.currentGoal));
+      });
+    }
+
+    const startBtn = document.getElementById('start-run-btn');
+    if (startBtn) startBtn.addEventListener('click', () => this.startRun());
+
+    const warmupBtn = document.getElementById('warmup-btn');
+    if (warmupBtn) warmupBtn.addEventListener('click', () => this.startWarmup());
+
+    const routeBtn = document.getElementById('route-planning-btn');
+    if (routeBtn) routeBtn.addEventListener('click', () => this.planRoute());
+
+    // Audio controls
+    this.setupAudioControls();
+
+    // Safety button
+    const emergencyBtn = document.querySelector('.emergency-contact .btn');
+    if (emergencyBtn) emergencyBtn.addEventListener('click', () => this.shareLocation());
+
+    // Modal controls
+    this.setupModalControls();
+
+    // Session controls
+    const pauseBtn = document.getElementById('pause-session');
+    if (pauseBtn) pauseBtn.addEventListener('click', () => this.pauseSession());
+
+    const stopBtn = document.getElementById('stop-session');
+    if (stopBtn) stopBtn.addEventListener('click', () => this.stopSession());
+
+    const closeModalBtn = document.getElementById('close-session-modal');
+    if (closeModalBtn) closeModalBtn.addEventListener('click', () => this.closeSessionModal());
+  }
+
+  selectActivityType(selectedButton) {
+    if (!selectedButton) return;
+    document.querySelectorAll('.activity-type').forEach(btn => btn.classList.remove('active'));
+    selectedButton.classList.add('active');
+
+    this.currentActivityType = selectedButton.dataset.type || 'running';
+    localStorage.setItem('lastActivityType', this.currentActivityType);
+    this.updateActivityStats(); // update quick stats view (shows sample if no data)
+    this.updateCalorieCalculation();
+  }
+
+  selectGoalType(selectedButton) {
+    if (!selectedButton) return;
+    document.querySelectorAll('.goal-option').forEach(btn => btn.classList.remove('active'));
+    selectedButton.classList.add('active');
+
+    this.currentGoal.type = selectedButton.dataset.goal || 'distance';
+    this.updateGoalDisplay();
+    localStorage.setItem('lastGoal', JSON.stringify(this.currentGoal));
+  }
+
+  updateGoalDisplay() {
+    const goalUnit = document.querySelector('.goal-unit');
+    const goalInput = document.querySelector('.goal-input input');
+    if (!goalUnit || !goalInput) return;
+
+    switch (this.currentGoal.type) {
+      case 'distance':
+        goalUnit.textContent = 'km';
+        goalInput.placeholder = '5.0';
+        break;
+      case 'time':
+        goalUnit.textContent = 'min';
+        goalInput.placeholder = '30';
+        break;
+      case 'calories':
+        goalUnit.textContent = 'cal';
+        goalInput.placeholder = '300';
+        break;
+    }
+    goalInput.value = this.currentGoal.value || '';
+  }
+
+  updateActivityStats() {
+    // If there are saved sessions, loadHistoricalStats will set quick stats.
+    // Otherwise show sensible defaults or zeros.
+    const statPaceEl = document.querySelector('.stat-card:nth-child(2) .stat-value');
+    const statKmEl = document.querySelector('.stat-card:first-child .stat-value');
+    const statCalEl = document.querySelector('.stat-card:nth-child(3) .stat-value');
+
+    // Fallback placeholder values if no historical data:
+    const defaults = {
+      running: { pace: '08:24', totalKm: '0' }, // set 0 so empty
+      walking: { pace: '12:30', totalKm: '0' },
+      hiking: { pace: '15:45', totalKm: '0' },
+      cycling: { pace: '04:15', totalKm: '0' }
+    };
+
+    const sample = defaults[this.currentActivityType] || defaults.running;
+
+    if (statPaceEl) statPaceEl.textContent = sample.pace;
+    if (statKmEl) statKmEl.textContent = sample.totalKm;
+    if (statCalEl) statCalEl.textContent = '0';
+  }
+
+  updateCalorieCalculation() {
+    const calorieRates = { running: 60, walking: 40, hiking: 70, cycling: 25 };
+    const rate = calorieRates[this.currentActivityType] || 60;
+    this.caloriesBurned = Math.round(this.currentDistance * rate);
+    this.updateLiveStats();
+  }
+
+  /* ---------- Start / Pause / Stop ---------- */
+
+  startWarmup() {
+    this.showCountdown(5, () => this.showNotification('Warm-up complete! Ready to start your activity.'));
+  }
+
+  startRun() {
+    if (this.isRunning) {
+      // if already running, the button acts as pause/resume — do nothing here
+      return;
+    }
+    this.showCountdown(3, () => this.beginRunningSession());
+  }
+
+  beginRunningSession() {
+    if (this.isRunning) return;
+    this.isRunning = true;
+    this.isPaused = false;
+    this.startTime = Date.now();
+    this.totalPausedTime = 0;
+    this.positions = [];
+    this.splits = [];
+    this.lastSplitDistance = 0;
+    this.currentDistance = 0;
+    this.currentSteps = 0;
+    this.caloriesBurned = 0;
+
+    // grab initial position but don't duplicate (getCurrentLocation already pushes)
+    this.getCurrentLocation().catch(() => { /* continue even if denied - mock allowed */ });
+
+    this.startGPSWatch();
+    this.startUpdateInterval();
+    this.startStepCounter();
+    this.startHeartRateMonitor();
+    this.showActiveSessionModal();
+
+    // update Start button to read "Pause Run" visually
+    const startBtn = document.getElementById('start-run-btn');
+    if (startBtn) startBtn.innerHTML = `
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+      </svg>
+      Pause Run
+    `;
+
+    this.showNotification(`${this.currentActivityType.charAt(0).toUpperCase() + this.currentActivityType.slice(1)} session started!`);
+  }
+
+  pauseSession() {
+    if (!this.isRunning) return;
+
+    this.isPaused = !this.isPaused;
+
+    const pauseBtn = document.getElementById('pause-session');
+    if (this.isPaused) {
+      this.pauseTime = Date.now();
+      this.stopStepCounter();
+      this.showNotification('Session paused');
+      if (pauseBtn) pauseBtn.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+        </svg>
+        Resume
+      `;
+    } else {
+      // resume
+      this.totalPausedTime += Date.now() - (this.pauseTime || Date.now());
+      this.pauseTime = null;
+      this.startStepCounter();
+      this.showNotification('Session resumed');
+      if (pauseBtn) pauseBtn.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+        </svg>
+        Pause
+      `;
+    }
+  }
+
+  stopSession() {
+    if (!this.isRunning) return;
+
+    this.isRunning = false;
+    this.isPaused = false;
+
+    const endTime = Date.now();
+    const durationSeconds = Math.max(0, Math.round((endTime - this.startTime - this.totalPausedTime) / 1000));
+
+    this.stopGPSWatch();
+    this.stopUpdateInterval();
+    this.stopStepCounter();
+    this.stopHeartRateMonitor();
+    this.closeSessionModal();
+
+    const sessionData = {
+      activityType: this.currentActivityType,
+      startTime: this.startTime,
+      endTime,
+      duration: durationSeconds, // seconds
+      distance: Number((this.currentDistance).toFixed(2)), // km
+      calories: this.caloriesBurned,
+      steps: this.currentSteps,
+      averagePace: this.calculateAveragePace(),
+      splits: this.splits,
+      route: this.positions
+    };
+
+    // Save to local storage (and placeholder for firebase later)
+    this.saveSessionToLocal(sessionData);
+    // keep console log for debugging
+    console.log('Saved session:', sessionData);
+
+    // Reset UI
+    const startBtn = document.getElementById('start-run-btn');
+    if (startBtn) startBtn.innerHTML = `
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+      </svg>
+      Start Run
+    `;
+
+    this.showNotification(`Session completed! Distance: ${this.currentDistance.toFixed(2)}km, Time: ${this.formatTime(durationSeconds)}`);
+
+    this.resetStats();
+  }
+
+  resetStats() {
+    this.currentDistance = 0;
+    this.currentSteps = 0;
+    this.caloriesBurned = 0;
+    this.positions = [];
+    this.splits = [];
+    this.lastSplitDistance = 0;
+    this.updateLiveStats();
+    this.updateStepCounter();
+    if (this.routeLayer) this.routeLayer.clearLayers();
+    if (this.markerLayer) this.markerLayer.clearLayers();
+  }
+
+  /* ---------- Update loop / UI ---------- */
+
+  startUpdateInterval() {
+    if (this.updateInterval) return;
+    this.updateInterval = setInterval(() => {
+      this.updateLiveStats();
+      this.updateSessionModal();
+      this.checkGoalAchievement();
+    }, 1000);
+  }
+
+  stopUpdateInterval() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+      this.updateInterval = null;
+    }
+  }
+
+  updateLiveStats() {
+    const timeEl = document.getElementById('current-time');
+    const distanceEl = document.getElementById('current-distance');
+    const paceEl = document.getElementById('current-pace');
+    const caloriesEl = document.getElementById('current-calories');
+
+    const currentTime = this.getCurrentTime();
+    const currentPace = this.calculateCurrentPace();
+
+    if (timeEl) timeEl.textContent = currentTime;
+    if (distanceEl) distanceEl.textContent = this.currentDistance.toFixed(2);
+    if (paceEl) paceEl.textContent = currentPace;
+    if (caloriesEl) caloriesEl.textContent = this.caloriesBurned;
+  }
+
+  getCurrentTime() {
+    if (!this.startTime) return '00:00:00';
+    const now = this.isPaused ? this.pauseTime || Date.now() : Date.now();
+    const elapsed = Math.max(0, Math.round((now - this.startTime - this.totalPausedTime) / 1000));
+    return this.formatTime(elapsed);
+  }
+
+  formatTime(seconds) {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  calculateCurrentPace() {
+    if (!this.startTime || this.currentDistance <= 0) return '--:--';
+    const now = this.isPaused ? this.pauseTime || Date.now() : Date.now();
+    const elapsed = Math.max(0, (now - this.startTime - this.totalPausedTime) / 1000); // seconds
+    const paceSecondsPerKm = elapsed / this.currentDistance;
+    return this.formatPace(Math.round(paceSecondsPerKm));
+  }
+
+  calculateAveragePace() {
+    if (!this.startTime || this.currentDistance <= 0) return '--:--';
+    const elapsed = Math.max(0, (Date.now() - this.startTime - this.totalPausedTime) / 1000);
+    const paceSecondsPerKm = elapsed / this.currentDistance;
+    return this.formatPace(Math.round(paceSecondsPerKm));
+  }
+
+  formatPace(totalSecondsPerKm) {
+    if (!isFinite(totalSecondsPerKm) || totalSecondsPerKm <= 0) return '--:--';
+    const m = Math.floor(totalSecondsPerKm / 60);
+    const s = Math.floor(totalSecondsPerKm % 60);
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  }
+
+  checkGoalAchievement() {
+    if (!this.currentGoal || !this.currentGoal.value) return;
+
+    let achieved = false;
+    switch (this.currentGoal.type) {
+      case 'distance':
+        achieved = this.currentDistance >= this.currentGoal.value;
+        break;
+      case 'time': {
+        if (!this.startTime) break;
+        const now = this.isPaused ? this.pauseTime || Date.now() : Date.now();
+        const elapsedMinutes = (now - this.startTime - this.totalPausedTime) / 60000;
+        achieved = elapsedMinutes >= this.currentGoal.value;
+        break;
+      }
+      case 'calories':
+        achieved = this.caloriesBurned >= this.currentGoal.value;
+        break;
+    }
+
+    if (achieved) {
+      this.showNotification(`Goal achieved! ${this.currentGoal.value} ${this.currentGoal.type} completed!`);
+      // prevent repeated notifications
+      this.currentGoal.value = null;
+    }
+  }
+
+  /* ---------- Step counter ---------- */
+
+  initializeStepCounter() {
+    if (window.DeviceMotionEvent) {
+      window.addEventListener('devicemotion', this.handleDeviceMotion.bind(this));
+    } else {
+      this.startSimulatedStepCounter();
+    }
+  }
+
+  handleDeviceMotion(event) {
+    if (!this.isRunning || this.isPaused) return;
+    const acc = event.accelerationIncludingGravity;
+    if (!acc) return;
+
+    const magnitude = Math.sqrt((acc.x || 0)**2 + (acc.y || 0)**2 + (acc.z || 0)**2);
+    if (magnitude > 15) { // threshold
+      this.currentSteps++;
+      this.updateStepCounter();
+      this.updateCalorieCalculation();
+    }
+  }
+
+  startSimulatedStepCounter() {
+    if (this.stepCounterInterval) return;
+    this.stepCounterInterval = setInterval(() => {
+      if (this.isRunning && !this.isPaused) {
+        const stepsPerKm = { running: 1300, walking: 1400, hiking: 1200, cycling: 0 };
+        const rate = stepsPerKm[this.currentActivityType] || 1300;
+        const newSteps = Math.round(this.currentDistance * rate);
+        if (newSteps > this.currentSteps) {
+          this.currentSteps = newSteps;
+          this.updateStepCounter();
+        }
+      }
+    }, 2000);
+  }
+
+  startStepCounter() {
+    if (!this.stepCounterInterval) this.startSimulatedStepCounter();
+  }
+
+  stopStepCounter() {
+    if (this.stepCounterInterval) {
+      clearInterval(this.stepCounterInterval);
+      this.stepCounterInterval = null;
+    }
+  }
+
+  updateStepCounter() {
+    const stepCountElement = document.querySelector('.step-count');
+    const progressFill = document.querySelector('.progress-fill');
+    if (stepCountElement) stepCountElement.textContent = this.currentSteps.toLocaleString();
+    if (progressFill) {
+      const progress = Math.min((this.currentSteps / 10000) * 100, 100);
+      progressFill.style.width = `${progress}%`;
+    }
+  }
+
+  /* ---------- Heart rate (simulated) ---------- */
+
+  initializeHeartRate() {
+    if (navigator.bluetooth) {
+      this.connectHeartRateMonitor();
+    } else {
+      this.startSimulatedHeartRate();
+    }
+  }
+
+  connectHeartRateMonitor() {
+    console.log('Bluetooth HR monitoring not implemented — using simulation');
+    this.startSimulatedHeartRate();
+  }
+
+  startSimulatedHeartRate() {
+    if (this.heartRateInterval) return;
+    this.heartRateInterval = setInterval(() => {
+      if (this.isRunning && !this.isPaused) {
+        const baseRate = 72;
+        const activityBoost = { running: 40, walking: 20, hiking: 30, cycling: 35 };
+        const boost = activityBoost[this.currentActivityType] || 30;
+        const randomVariation = Math.random() * 10 - 5;
+        this.heartRate = Math.round(baseRate + boost + randomVariation);
+      } else {
+        this.heartRate = Math.max(72, this.heartRate - 1);
+      }
+      this.updateHeartRateDisplay();
+    }, 3000);
+  }
+
+  startHeartRateMonitor() { /* simulated runs independently */ }
+  stopHeartRateMonitor() { /* keeping simulated HR for resting display */ }
+
+  updateHeartRateDisplay() {
+    const el = document.querySelector('.heart-rate-value');
+    if (el) el.textContent = this.heartRate;
+  }
+
+  /* ---------- Route planning ---------- */
+
+  planRoute() {
+    if (!this.map) return;
+    this.showNotification('Route planning mode activated. Click on the map to set waypoints.');
+    if (this.plannedRouteLayer) this.map.removeLayer(this.plannedRouteLayer);
+    this.plannedRouteLayer = L.layerGroup().addTo(this.map);
+    this.plannedWaypoints = [];
+    this.map.on('click', this.handleMapClick.bind(this));
+  }
+
+  handleMapClick(e) {
+    if (!this.plannedRouteLayer || !e || !e.latlng) return;
+    const { lat, lng } = e.latlng;
+    this.plannedWaypoints.push([lat, lng]);
+    L.marker([lat, lng]).addTo(this.plannedRouteLayer).bindPopup(`Waypoint ${this.plannedWaypoints.length}`).openPopup();
+
+    if (this.plannedWaypoints.length > 1) {
+      L.polyline(this.plannedWaypoints, { color: '#f97316', weight: 3, opacity: 0.7, dashArray: '5,10' }).addTo(this.plannedRouteLayer);
+    }
+
+    if (this.plannedWaypoints.length >= 2) {
+      let totalDistance = 0;
+      for (let i = 1; i < this.plannedWaypoints.length; i++) {
+        const prev = this.plannedWaypoints[i - 1];
+        const curr = this.plannedWaypoints[i];
+        totalDistance += this.calculateDistanceBetween(prev[0], prev[1], curr[0], curr[1]);
+      }
+      this.showNotification(`Planned route: ${totalDistance.toFixed(2)} km`);
+    }
+  }
+
+  /* ---------- Audio ---------- */
+
+  setupAudioControls() {
+    const audioButtons = document.querySelectorAll('.audio-btn');
+    audioButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        const btn = e.currentTarget;
+        if (btn.classList.contains('play-pause')) this.toggleAudio();
+        else this.showNotification('Audio controls would switch tracks');
+      });
+    });
+  }
+
+  toggleAudio() {
+    this.audioPlaying = !this.audioPlaying;
+    const playPauseBtn = document.querySelector('.audio-btn.play-pause');
+    if (!playPauseBtn) return;
+    if (this.audioPlaying) {
+      playPauseBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>`;
+      this.showNotification('Audio playing: Power Workout Mix');
+    } else {
+      playPauseBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>`;
+      this.showNotification('Audio paused');
+    }
+  }
+
+  /* ---------- Location sharing ---------- */
+
+  shareLocation() {
+    if (navigator.share && this.positions.length > 0) {
+      const lastPos = this.positions[this.positions.length - 1];
+      navigator.share({
+        title: 'My Current Location',
+        text: `I'm currently at ${lastPos.lat.toFixed(6)}, ${lastPos.lng.toFixed(6)}`,
+        url: `https://maps.google.com/?q=${lastPos.lat},${lastPos.lng}`
+      }).catch(() => {
+        this.showNotification('Share cancelled or not supported');
+      });
+    } else {
+      this.showNotification('Location sharing activated. Emergency contacts notified.');
+    }
+  }
+
+  /* ---------- Weather ---------- */
+
+  initializeWeather() {
+    this.fetchCurrentWeather();
+  }
+
+  async fetchCurrentWeather() {
+    try {
+      // use exposed helper if available (bootstrap provides window.GymAPI)
+      const GymAPI = window.GymAPI;
+      let data = null;
+
+      // try to use coords first
+      let pos = null;
+      try {
+        pos = await this.getCurrentLocation();
+      } catch (_) { pos = null; }
+
+      if (pos && GymAPI && typeof GymAPI.fetchWeatherByCoords === 'function') {
+        data = await GymAPI.fetchWeatherByCoords(pos.lat, pos.lng);
+      } else if (GymAPI && typeof GymAPI.fetchWeatherByCity === 'function') {
+        // fallback to default or Cape Town
+        const defaultCity = (GymAPI.config && GymAPI.config.defaultCity) || 'Cape Town';
+        data = await GymAPI.fetchWeatherByCity(defaultCity);
+      } else {
+        // last resort: direct fetch using Vite-injected config if available
+        const cfg = (window.GymAPI && window.GymAPI.config) || (await this.safeImportConfig());
+        const apiKey = cfg && cfg.weather && cfg.weather.apiKey;
+        const baseURL = cfg && cfg.weather && cfg.weather.baseURL;
+        if (apiKey && baseURL && pos) {
+          const url = `${baseURL}/weather?lat=${pos.lat}&lon=${pos.lng}&appid=${apiKey}&units=metric`;
+          const res = await fetch(url);
+          if (res.ok) data = await res.json();
+        }
+      }
+
+      if (data) this.updateWeatherDisplay(data);
+      else this.showDefaultWeather();
+    } catch (err) {
+      console.warn('Weather fetch error', err);
+      this.showDefaultWeather();
+    }
+  }
+
+  async safeImportConfig() {
+    // best-effort import of config module if available
+    try {
+      const mod = await import('/assets/config/api.js');
+      return mod.default || mod;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  updateWeatherDisplay(weatherData) {
+    const weatherTemp = document.querySelector('.weather-temp');
+    const weatherCondition = document.querySelector('.weather-condition');
+    const weatherLocation = document.querySelector('.weather-location');
+    const stats = document.querySelectorAll('.weather-stats .weather-stat .stat-value');
+
+    if (weatherTemp && weatherData && weatherData.main) weatherTemp.textContent = `${Math.round(weatherData.main.temp)}°C`;
+    if (weatherCondition && weatherData && weatherData.weather) weatherCondition.textContent = weatherData.weather[0].description;
+    if (weatherLocation && weatherData) weatherLocation.textContent = weatherData.name || '';
+
+    if (stats && stats.length >= 2 && weatherData && weatherData.main) {
+      stats[0].textContent = `${weatherData.main.humidity}%`;
+      stats[1].textContent = weatherData.wind && weatherData.wind.speed ? `${Math.round(weatherData.wind.speed * 3.6)} km/h` : '--';
+    }
+  }
+
+  showDefaultWeather() {
+    const weatherTemp = document.querySelector('.weather-temp');
+    const weatherCondition = document.querySelector('.weather-condition');
+    if (weatherTemp) weatherTemp.textContent = '18°C';
+    if (weatherCondition) weatherCondition.textContent = 'Partly Cloudy';
+  }
+
+  /* ---------- Map / UI helpers ---------- */
+
+  checkGPSStatus() { /* updated by watchPosition */ }
+
+  showMapLoading(show) {
+    const mapContainer = document.getElementById('map-container');
+    if (!mapContainer) return;
+    const loadingElement = mapContainer.querySelector('.map-loading');
+    if (loadingElement) loadingElement.style.display = show ? 'flex' : 'none';
+    if (!show) mapContainer.classList.add('map-loaded');
+  }
+
+  showLocationModal() {
+    const modal = document.getElementById('location-modal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    const allowBtn = document.getElementById('allow-location');
+    const denyBtn = document.getElementById('deny-location');
+
+    if (allowBtn) allowBtn.onclick = () => {
+      modal.style.display = 'none';
+      this.getCurrentLocation().catch(() => {});
+    };
+
+    if (denyBtn) denyBtn.onclick = () => {
+      modal.style.display = 'none';
+      if (this.map) this.map.setView([37.7749, -122.4194], 10);
+      this.showMapLoading(false);
+    };
+  }
+
+  showActiveSessionModal() {
+    const modal = document.getElementById('active-session-modal');
+    if (modal) modal.style.display = 'flex';
+  }
+
+  closeSessionModal() {
+    const modal = document.getElementById('active-session-modal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  updateSessionModal() {
+    const timeEl = document.getElementById('session-time');
+    const distanceEl = document.getElementById('session-distance');
+    const paceEl = document.getElementById('session-pace');
+    if (timeEl) timeEl.textContent = this.getCurrentTime();
+    if (distanceEl) distanceEl.textContent = `${this.currentDistance.toFixed(2)} km`;
+    if (paceEl) paceEl.textContent = this.calculateCurrentPace();
+  }
+
+  setupModalControls() {
+    document.addEventListener('click', (e) => {
+      if (e.target && e.target.classList && e.target.classList.contains('modal')) {
+        e.target.style.display = 'none';
+      }
+    });
+  }
+
+  showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.cssText = `
+      position: fixed; top: 20px; right: 20px;
+      background: var(--primary-500); color: white; padding: 12px 20px;
+      border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 10000;
+      transform: translateX(400px); transition: transform 0.3s ease;
+    `;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+    setTimeout(() => {
+      notification.style.transform = 'translateX(400px)';
+      setTimeout(() => notification.remove(), 350);
+    }, 3000);
+  }
+
+  /* ---------- Utility: quick stats UI ---------- */
+
+  updateQuickStatsDisplay({ totalKm = 0, avgPace = '--:--', calories = 0 } = {}) {
+    // quick stats layout: first stat-card total km, second avg pace, third calories
+    const statCards = document.querySelectorAll('.stats-grid .stat-card .stat-info .stat-value');
+    // fallback query if structure differs
+    const statEls = statCards.length ? statCards : [
+      document.querySelector('.stat-card:first-child .stat-value'),
+      document.querySelector('.stat-card:nth-child(2) .stat-value'),
+      document.querySelector('.stat-card:nth-child(3) .stat-value')
+    ];
+
+    if (statEls && statEls[0]) statEls[0].textContent = (totalKm ? Number(totalKm).toFixed(1) : '0');
+    if (statEls && statEls[1]) statEls[1].textContent = avgPace || '--:--';
+    if (statEls && statEls[2]) statEls[2].textContent = calories ? String(calories) : '0';
+  }
+
+  /* ---------- Proxy / external helpers ---------- */
+
+  // optional proxy method if you configure VITE_API_PROXY_URL
+  async proxyFetch(path, opts = {}) {
+    const proxy = import.meta.env.VITE_API_PROXY_URL;
+    if (!proxy) throw new Error('Proxy URL not configured');
+    const url = proxy.replace(/\/$/, '') + '/' + path.replace(/^\//, '');
+    const res = await fetch(url, opts);
+    if (!res.ok) throw new Error('Proxy fetch failed: ' + res.status);
+    return res.json();
+  }
+}
+
+/* Initialize tracker on DOMContentLoaded */
+document.addEventListener('DOMContentLoaded', () => {
+  window.runningTracker = new RunningTracker();
+});

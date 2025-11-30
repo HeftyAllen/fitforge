@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - FitForge</title>
+    <meta name="description" content="Manage your FitForge account settings and preferences">
+    <link rel="stylesheet" href="assets/css/styles.css">
+     <link rel="stylesheet" href="assets/css/settings.css">
+</head>
+<body class="dashboard-page">
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <a href="home.html" class="logo">
+                        <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 4L4 16l12 12 12-12L16 4zm0 4.5l7.5 7.5L16 23.5 8.5 16 16 8.5z"/>
+                            <circle cx="16" cy="16" r="4"/>
+                        </svg>
+                        <span class="logo-text">FitForge</span>
+                    </a>
+                </div>
+                
+                  <nav class="main-nav">
+        <a href="home.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            Dashboard
+        </a>
+        <a href="workouts.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+            </svg>
+            Workouts
+        </a>
+        <a href="nutrition.html" class="nav-link ">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+            Nutrition
+        </a>
+        <a href="running-tracker.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Running Tracker
+        </a>
+        <a href="progress.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+            </svg>
+            Progress
+        </a>
+        <a href="community.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+            </svg>
+            Community
+        </a>
+        <a href="chatbot.html" class="nav-link">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+            </svg>
+            Chatbot
+        </a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn notification-btn" aria-label="Notifications" >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <span class="notification-badge" >3</span>
+        </button>
+        
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+            <svg class="theme-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+        
+        <div class="user-menu">
+            <button class="user-btn" aria-label="User menu">
+                <img src="assets/images/avatar-placeholder.jpg" alt="User avatar" class="user-avatar">
+                <span class="user-name">Alex Johnson</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="user-dropdown">
+                <a href="profile.html" class="dropdown-item active">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="dropdown-item nav-link active">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    Settings
+                </a>
+                                       <a href="sync-status.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 12a9 9 0 0114.7-6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M17 2v4h-4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21 12a9 9 0 01-14.7 6.4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7 22v-4h4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Sync
+</a>
+<a href="export.html" class="dropdown-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3.5" y="13.5" width="17" height="6" rx="1.2"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 3.5v10"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 7.5L12 3.5l3.5 4"
+              fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    Export
+</a>
+                <div class="dropdown-divider"></div>
+                <a href="auth-login.html" class="dropdown-item text-danger">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign Out
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="settings-container">
+                <!-- Settings Navigation -->
+                <div class="settings-nav">
+                    <h2>Settings</h2>
+                    <nav class="settings-menu">
+                        <a href="#account" class="menu-item active" data-section="account">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                            </svg>
+                            Account
+                        </a>
+                        <a href="#privacy" class="menu-item" data-section="privacy">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Privacy & Security
+                        </a>
+                        <a href="#notifications" class="menu-item" data-section="notifications">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+                            </svg>
+                            Notifications
+                        </a>
+                        <a href="#preferences" class="menu-item" data-section="preferences">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                            </svg>
+                            Preferences
+                        </a>
+                        <a href="#billing" class="menu-item" data-section="billing">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                            </svg>
+                            Billing
+                        </a>
+                        <a href="#integrations" class="menu-item" data-section="integrations">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"/>
+                            </svg>
+                            Integrations
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <!-- Account Settings -->
+                    <section id="account" class="settings-section active">
+                        <div class="section-header">
+                            <h2>Account Settings</h2>
+                            <p>Manage your account information and preferences</p>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Personal Information</h3>
+                            <form class="settings-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" id="firstName" class="form-input" value="Alex" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" id="lastName" class="form-input" value="Johnson" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" id="email" class="form-input" value="alex.johnson@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" id="phone" class="form-input" value="+1 (555) 123-4567">
+                                </div>
+                                <div class="form-group">
+                                    <label for="location" class="form-label">Location</label>
+                                    <input type="text" id="location" class="form-input" value="New York, USA">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Change Password</h3>
+                            <form class="settings-form">
+                                <div class="form-group">
+                                    <label for="currentPassword" class="form-label">Current Password</label>
+                                    <input type="password" id="currentPassword" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword" class="form-label">New Password</label>
+                                    <input type="password" id="newPassword" class="form-input" required>
+                                    <div class="form-hint">Must be at least 8 characters with numbers and symbols</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                                    <input type="password" id="confirmPassword" class="form-input" required>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Update Password</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Account Management</h3>
+                            <div class="danger-zone">
+                                <h4>Danger Zone</h4>
+                                <p>These actions are irreversible. Please proceed with caution.</p>
+                                <div class="danger-actions">
+                                    <button class="btn btn-danger" onclick="exportData()">
+                                        Export My Data
+                                    </button>
+                                    <button class="btn btn-danger" onclick="deleteAccount()">
+                                        Delete Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Privacy & Security -->
+                    <section id="privacy" class="settings-section">
+                        <div class="section-header">
+                            <h2>Privacy & Security</h2>
+                            <p>Control your privacy settings and security preferences</p>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Privacy Settings</h3>
+                            <div class="toggle-group">
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Public Profile</span>
+                                        <span class="toggle-description">Allow other users to view your profile and progress</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Activity Sharing</span>
+                                        <span class="toggle-description">Share your workout completions with friends</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Data Analytics</span>
+                                        <span class="toggle-description">Help us improve by sharing anonymous usage data</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Security</h3>
+                            <div class="toggle-group">
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Two-Factor Authentication</span>
+                                        <span class="toggle-description">Add an extra layer of security to your account</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </div>
+                                </div>
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Login Notifications</span>
+                                        <span class="toggle-description">Get notified of new sign-ins from unknown devices</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Active Sessions</h3>
+                            <div class="sessions-list">
+                                <div class="session-item current">
+                                    <div class="session-info">
+                                        <span class="session-device">Chrome on Windows</span>
+                                        <span class="session-location">New York, USA</span>
+                                        <span class="session-time">Current session</span>
+                                    </div>
+                                    <button class="session-action" disabled>Current</button>
+                                </div>
+                                <div class="session-item">
+                                    <div class="session-info">
+                                        <span class="session-device">Safari on iPhone</span>
+                                        <span class="session-location">New York, USA</span>
+                                        <span class="session-time">2 hours ago</span>
+                                    </div>
+                                    <button class="session-action" onclick="revokeSession(this)">Revoke</button>
+                                </div>
+                                <div class="session-item">
+                                    <div class="session-info">
+                                        <span class="session-device">Firefox on Mac</span>
+                                        <span class="session-location">Boston, USA</span>
+                                        <span class="session-time">3 days ago</span>
+                                    </div>
+                                    <button class="session-action" onclick="revokeSession(this)">Revoke</button>
+                                </div>
+                            </div>
+                            <div class="session-actions">
+                                <button class="btn btn-secondary" onclick="revokeAllSessions()">Revoke All Other Sessions</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Notifications -->
+                    <section id="notifications" class="settings-section">
+                        <div class="section-header">
+                            <h2>Notification Settings</h2>
+                            <p>Choose how and when you want to be notified</p>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Email Notifications</h3>
+                            <div class="toggle-group">
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Workout Reminders</span>
+                                        <span class="toggle-description">Get reminded about scheduled workouts</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Progress Reports</span>
+                                        <span class="toggle-description">Weekly summaries of your fitness progress</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Product Updates</span>
+                                        <span class="toggle-description">News about new features and improvements</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Push Notifications</h3>
+                            <div class="toggle-group">
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Workout Alerts</span>
+                                        <span class="toggle-description">Notifications for upcoming workouts</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Achievement Alerts</span>
+                                        <span class="toggle-description">When you reach new milestones</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="toggle-item">
+                                    <div class="toggle-info">
+                                        <span class="toggle-label">Friend Activity</span>
+                                        <span class="toggle-description">When friends complete workouts or set records</span>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Notification Schedule</h3>
+                            <div class="schedule-settings">
+                                <div class="form-group">
+                                    <label for="quietHours" class="form-label">Quiet Hours</label>
+                                    <div class="time-range">
+                                        <input type="time" id="quietStart" class="form-input" value="22:00">
+                                        <span>to</span>
+                                        <input type="time" id="quietEnd" class="form-input" value="07:00">
+                                    </div>
+                                    <div class="form-hint">No notifications will be sent during these hours</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Add more sections for Preferences, Billing, and Integrations as needed -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/settings.js"></script>
+</body>
+</html>
